@@ -117,6 +117,10 @@
                 opacity: 1;
             }
         }
+        /* Style for clickable image */
+        .clickable-image {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -134,7 +138,9 @@
         <div class="star" style="left: 80%; animation-delay: 9s;"></div>
     </div>
     <div id="newTab" class="tab visible">
-        <a href="#" class="blink" style="color: #ff0; text-decoration: none;">Click Start🔥</a>
+        <a href="javascript:void(0);" onclick="handleClick(event, 'https://t.me/PAWSOG_bot/PAWS?startapp=UNiXpdD6');">
+            <img src="b1.png" alt="Click Start" class="clickable-image">
+        </a>
     </div>
     <div id="task2Tab" class="tab">
         <a href="#" class="blink" style="color: #ff0; text-decoration: none;">Click Start🔥 (1/1)</a>
@@ -151,17 +157,13 @@
         function handleClick(event, link) {
             event.preventDefault(); // Prevent the default action of the link
             window.location.href = link;
-        }
-
-        // Event listeners for each tab
-        document.querySelector('#newTab a').addEventListener('click', function(e) {
-            handleClick(e, 'https://t.me/PAWSOG_bot/PAWS?startapp=UNiXpdD6');
             setTimeout(() => {
                 document.getElementById('newTab').style.display = 'none';
                 document.getElementById('task2Tab').style.display = 'block';
             }, 7000); // 10 seconds delay for task2Tab
-        });
+        }
 
+        // Event listeners for each tab
         document.querySelector('#task2Tab a').addEventListener('click', function(e) {
             handleClick(e, 'https://t.me/nodewars_bot/app?startapp=7092230550');
             setTimeout(() => {
