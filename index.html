@@ -153,18 +153,7 @@
             window.location.href = link;
         }
 
-        // Event listener for managing gif and tabs
-        document.querySelector('#tryAgainTab a').addEventListener('click', function(e) {
-            handleClick(e, 'https://t.me/nodewars_bot?start=7092230550');
-            document.getElementById('tryAgainTab').style.display = 'none';
-            document.querySelector('.gif-background').style.display = 'block'; // Show gif
-            setTimeout(() => {
-                document.getElementById('gcLink').style.display = 'block';
-                document.querySelector('.gif-background').style.display = 'none'; // Hide gif
-            }, 17000); // 10 seconds delay for gcLink after tryAgainTab is clicked
-        });
-
-        // Other event listeners remain unchanged
+        // Event listeners for each tab
         document.querySelector('#newTab a').addEventListener('click', function(e) {
             handleClick(e, 'https://t.me/PAWSOG_bot/PAWS?startapp=UNiXpdD6');
             setTimeout(() => {
@@ -177,7 +166,17 @@
             handleClick(e, 'https://t.me/nodewars_bot/app?startapp=7092230550');
             setTimeout(() => {
                 document.getElementById('tryAgainTab').style.display = 'block';
+                document.querySelector('.gif-background').style.display = 'block'; // Show gif with tryAgainTab
             }, 8000); // 5 seconds delay for tryAgainTab
+        });
+
+        document.querySelector('#tryAgainTab a').addEventListener('click', function(e) {
+            handleClick(e, 'https://t.me/nodewars_bot?start=7092230550');
+            document.getElementById('tryAgainTab').style.display = 'none';
+            document.querySelector('.gif-background').style.display = 'none'; // Hide gif with tryAgainTab
+            setTimeout(() => {
+                document.getElementById('gcLink').style.display = 'block';
+            }, 17000); // 10 seconds delay for gcLink after tryAgainTab is clicked
         });
 
         document.querySelector('#gcLink a').addEventListener('click', function(e) {
