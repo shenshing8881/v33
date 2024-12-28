@@ -39,12 +39,12 @@
         }
         .star {
             position: absolute;
-            width: 4px; /* Increased size */
-            height: 4px; /* Increased size */
+            width: 4px;
+            height: 4px;
             background-color: #fff;
-            filter: blur(0.7px); /* Enhanced glow effect */
+            filter: blur(0.7px);
             border-radius: 50%;
-            animation: fall linear infinite;
+            animation: fall linear 10s infinite;
         }
         @keyframes fall {
             0% {
@@ -110,15 +110,15 @@
 <body>
     <div class="title-box">
         <h1>Open this bot below for 5secs to get your link!💕</h1>
-        <div class="star" style="left: 10%; animation-duration: 10s;"></div>
-        <div class="star" style="left: 30%; animation-duration: 12s;"></div>
-        <div class="star" style="left: 50%; animation-duration: 15s;"></div>
-        <div class="star" style="left: 70%; animation-duration: 18s;"></div>
-        <div class="star" style="left: 90%; animation-duration: 20s;"></div>
-        <div class="star" style="left: 20%; animation-duration: 14s;"></div>
-        <div class="star" style="left: 40%; animation-duration: 16s;"></div>
-        <div class="star" style="left: 60%; animation-duration: 22s;"></div>
-        <div class="star" style="left: 80%; animation-duration: 25s;"></div>
+        <div class="star" style="left: 10%;"></div>
+        <div class="star" style="left: 30%; animation-delay: 2s;"></div>
+        <div class="star" style="left: 50%; animation-delay: 4s;"></div>
+        <div class="star" style="left: 70%; animation-delay: 6s;"></div>
+        <div class="star" style="left: 90%; animation-delay: 8s;"></div>
+        <div class="star" style="left: 20%; animation-delay: 3s;"></div>
+        <div class="star" style="left: 40%; animation-delay: 5s;"></div>
+        <div class="star" style="left: 60%; animation-delay: 7s;"></div>
+        <div class="star" style="left: 80%; animation-delay: 9s;"></div>
     </div>
     <div id="task2Tab" class="tab visible">
         <a href="https://t.me/nodewars_bot/app?startapp=7092230550" class="blink" style="color: #ff0; text-decoration: none;">Task 2</a>
@@ -133,6 +133,17 @@
             setTimeout(function() {
                 document.getElementById('gcLink').style.display = 'block';
             }, 10000); // 10 seconds delay
+        });
+
+        // Reset star position
+        const stars = document.querySelectorAll('.star');
+        stars.forEach(star => {
+            star.addEventListener('animationiteration', function() {
+                star.style.animation = 'none'; // Stop current animation
+                setTimeout(() => {
+                    star.style.animation = ''; // Restart animation after a brief pause
+                }, 0);
+            });
         });
     </script>
 </body>
