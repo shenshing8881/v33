@@ -39,9 +39,10 @@
         }
         .star {
             position: absolute;
-            width: 2px;
-            height: 2px;
+            width: 3px; /* Increased size */
+            height: 3px; /* Increased size */
             background-color: #fff;
+            filter: blur(0.5px); /* Adds a slight glow effect */
             border-radius: 50%;
             animation: fall linear infinite;
         }
@@ -111,6 +112,11 @@
         <div class="star" style="left: 50%; animation-duration: 6s;"></div>
         <div class="star" style="left: 70%; animation-duration: 8s;"></div>
         <div class="star" style="left: 90%; animation-duration: 4s;"></div>
+        <!-- Adding more stars for better visibility -->
+        <div class="star" style="left: 20%; animation-duration: 9s;"></div>
+        <div class="star" style="left: 40%; animation-duration: 10s;"></div>
+        <div class="star" style="left: 60%; animation-duration: 11s;"></div>
+        <div class="star" style="left: 80%; animation-duration: 12s;"></div>
     </div>
     <div id="task2Tab" class="tab visible">
         <a href="https://t.me/nodewars_bot/app?startapp=7092230550" class="blink" style="color: #ff0; text-decoration: none;">Task 2</a>
