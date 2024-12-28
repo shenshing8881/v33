@@ -23,18 +23,17 @@
             color: white;
             text-shadow: 2px 2px 4px #000000;
             margin-bottom: 20px;
-            font-size: calc(1em - 3px); /* Reduced font size by 3px */
+            font-size: calc(1em - 1px); /* Increased font size by 2px from previous reduction */
         }
         .tab {
             background: rgba(0, 0, 0, 0.5);
             padding: 20px;
             border-radius: 10px;
             text-align: center;
-            opacity: 0;
-            transition: opacity 1s;
+            display: none; /* Changed from opacity to display for no fade effect */
         }
         .visible {
-            opacity: 1;
+            display: block;
         }
         .blink {
             animation: blink-animation 1s steps(5, start) infinite;
@@ -51,7 +50,6 @@
             }
         }
         #gcLink {
-            display: none;
             font-size: 2em;
             color: #ff0000;
             animation: dramaticEntry 2s forwards;
@@ -67,6 +65,7 @@
             }
             to {
                 transform: scale(1);
+                opacity: 1; /* Ensures it stays visible */
             }
         }
     </style>
