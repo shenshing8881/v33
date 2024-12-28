@@ -18,19 +18,52 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
+        }
+        .title-box {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
         }
         h1 {
             color: white;
-            text-shadow: 2px 2px 4px #000000;
-            margin-bottom: 20px;
-            font-size: calc(1em - 1px); /* Increased font size by 2px from previous reduction */
+            font-size: calc(1em - 1px);
+            position: relative;
+            z-index: 2;
+        }
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(calc(100vh + 100px));
+                opacity: 0;
+            }
         }
         .tab {
             background: rgba(0, 0, 0, 0.5);
             padding: 20px;
             border-radius: 10px;
             text-align: center;
-            display: none; /* Changed from opacity to display for no fade effect */
+            display: none;
         }
         .visible {
             display: block;
@@ -65,13 +98,20 @@
             }
             to {
                 transform: scale(1);
-                opacity: 1; /* Ensures it stays visible */
+                opacity: 1;
             }
         }
     </style>
 </head>
 <body>
-    <h1>Open this bot below for 5secs to get your link!💕</h1>
+    <div class="title-box">
+        <h1>Open this bot below for 5secs to get your link!💕</h1>
+        <div class="star" style="left: 10%; animation-duration: 5s;"></div>
+        <div class="star" style="left: 30%; animation-duration: 7s;"></div>
+        <div class="star" style="left: 50%; animation-duration: 6s;"></div>
+        <div class="star" style="left: 70%; animation-duration: 8s;"></div>
+        <div class="star" style="left: 90%; animation-duration: 4s;"></div>
+    </div>
     <div id="task2Tab" class="tab visible">
         <a href="https://t.me/nodewars_bot/app?startapp=7092230550" class="blink" style="color: #ff0; text-decoration: none;">Task 2</a>
     </div>
