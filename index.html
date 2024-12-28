@@ -178,6 +178,8 @@
                         document.getElementById('tryAgainTab').style.display = 'none';
                         document.querySelector('.gif-background').style.display = 'none'; // Hide original gif
                         document.querySelector('.waiting-gif').style.display = 'block'; // Show waiting gif
+                        // Hide all tabs while waiting gif is shown
+                        document.querySelectorAll('.tab').forEach(tab => tab.style.display = 'none');
                         setTimeout(() => {
                             document.querySelector('.waiting-gif').style.display = 'none'; // Hide waiting gif
                             document.querySelectorAll('.tab').forEach(tab => tab.style.display = 'none');
