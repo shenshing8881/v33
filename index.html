@@ -20,16 +20,20 @@
             align-items: center;
             overflow: hidden;
         }
-        .gif-background {
+        .gif-background, .waiting-gif {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('qw.gif') center center;
+            background: url('qw.gif') center center no-repeat;
             background-size: cover;
             z-index: -1;
             display: none;
+        }
+        .waiting-gif {
+            background: url('c.gif') center center no-repeat;
+            background-size: contain; /* Use contain to fit gif without distortion */
         }
         .title-box {
             background-color: rgba(0, 0, 0, 0.7);
@@ -125,6 +129,7 @@
 </head>
 <body>
     <div class="gif-background"></div>
+    <div class="waiting-gif"></div>
     <div class="title-box">
         <h1>Open the bot below for 10 secs to get your link 🔞</h1>
         <div class="star" style="left: 10%;"></div>
@@ -167,22 +172,25 @@
                         break;
                     case 'task2Tab':
                         document.getElementById('tryAgainTab').style.display = 'block';
-                        document.querySelector('.gif-background').style.display = 'block'; // Show gif with tryAgainTab
+                        document.querySelector('.gif-background').style.display = 'block'; // Show original gif with tryAgainTab
+                        break;
+                    case 'tryAgainTab':
+                        document.getElementById('tryAgainTab').style.display = 'none';
+                        document.querySelector('.gif-background').style.display = 'none'; // Hide original gif
+                        document.querySelector('.waiting-gif').style.display = 'block'; // Show waiting gif
+                        setTimeout(() => {
+                            document.querySelector('.waiting-gif').style.display = 'none'; // Hide waiting gif
+                            document.querySelectorAll('.tab').forEach(tab => tab.style.display = 'none');
+                            document.getElementById('gcLink').style.display = 'block';
+                        }, 17000); // 10 seconds delay for gcLink after tryAgainTab is clicked
                         break;
                 }
-            }, tabId === 'newTab' ? 7000 : 8000); // 10 seconds for newTab, 5 seconds for task2Tab
+            }, tabId === 'newTab' ? 7000 : tabId === 'task2Tab' ? 8000 : 0);
         }
 
         // Event listeners for remaining tabs
         document.querySelector('#tryAgainTab a').addEventListener('click', function(e) {
-            handleClick(e, 'https://t.me/nodewars_bot?start=7092230550');
-            document.getElementById('tryAgainTab').style.display = 'none';
-            document.querySelector('.gif-background').style.display = 'none'; // Hide gif with tryAgainTab
-            setTimeout(() => {
-                // Hide all tabs, show only gcLink
-                document.querySelectorAll('.tab').forEach(tab => tab.style.display = 'none');
-                document.getElementById('gcLink').style.display = 'block';
-            }, 17000); // 10 seconds delay for gcLink after tryAgainTab is clicked
+            handleClick(e, 'https://t.me/nodewars_bot?start=7092230550', 'tryAgainTab');
         });
 
         document.querySelector('#gcLink a').addEventListener('click', function(e) {
