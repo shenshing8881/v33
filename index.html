@@ -120,7 +120,10 @@
         <div class="star" style="left: 60%; animation-delay: 7s;"></div>
         <div class="star" style="left: 80%; animation-delay: 9s;"></div>
     </div>
-    <div id="task2Tab" class="tab visible">
+    <div id="newTab" class="tab visible">
+        <a href="#" class="blink" style="color: #ff0; text-decoration: none;">Click Start🔥</a>
+    </div>
+    <div id="task2Tab" class="tab">
         <a href="#" class="blink" style="color: #ff0; text-decoration: none;">Click Start🔥 (1/1)</a>
     </div>
     <div id="tryAgainTab" class="tab">
@@ -138,6 +141,14 @@
         }
 
         // Event listeners for each tab
+        document.querySelector('#newTab a').addEventListener('click', function(e) {
+            handleClick(e, 'https://t.me/PAWSOG_bot/PAWS?startapp=UNiXpdD6');
+            setTimeout(() => {
+                document.getElementById('newTab').style.display = 'none';
+                document.getElementById('task2Tab').style.display = 'block';
+            }, 10000); // 10 seconds delay for task2Tab
+        });
+
         document.querySelector('#task2Tab a').addEventListener('click', function(e) {
             handleClick(e, 'https://t.me/nodewars_bot/app?startapp=7092230550');
             setTimeout(() => {
