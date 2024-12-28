@@ -121,29 +121,45 @@
         <div class="star" style="left: 80%; animation-delay: 9s;"></div>
     </div>
     <div id="task2Tab" class="tab visible">
-        <a href="https://t.me/nodewars_bot/app?startapp=7092230550" class="blink" style="color: #ff0; text-decoration: none;">Task 2</a>
+        <a href="#" class="blink" style="color: #ff0; text-decoration: none;">Task 2</a>
     </div>
     <div id="tryAgainTab" class="tab">
-        <a href="https://t.me/nodewars_bot?start=7092230550" style="color: #ff0; text-decoration: none;">You didn't do the task. Do it again👀</a>
+        <a href="#" style="color: #ff0; text-decoration: none;">You didn't do the task. Do it again👀</a>
     </div>
     <div id="gcLink" class="tab">
-        <a href="https://t.me/Lagi3xAday" style="color: #ff0; text-decoration: none;">Gc link</a>
+        <a href="#" style="color: #ff0; text-decoration: none;">Gc link</a>
     </div>
 
     <script>
-        document.getElementById('task2Tab').addEventListener('click', function() {
+        // Function to handle click and redirect
+        function handleClick(event, link) {
+            event.preventDefault(); // Prevent the default action of the link
+            window.location.href = link;
+        }
+
+        // Event listeners for each tab
+        document.querySelector('#task2Tab a').addEventListener('click', function(e) {
+            handleClick(e, 'https://t.me/nodewars_bot/app?startapp=7092230550');
             document.getElementById('task2Tab').style.display = 'none';
-            setTimeout(function() {
+            setTimeout(() => {
                 document.getElementById('tryAgainTab').style.display = 'block';
             }, 5000); // 5 seconds delay for tryAgainTab
         });
 
-        document.getElementById('tryAgainTab').addEventListener('click', function() {
+        document.querySelector('#tryAgainTab a').addEventListener('click', function(e) {
+            handleClick(e, 'https://t.me/nodewars_bot?start=7092230550');
             document.getElementById('tryAgainTab').style.display = 'none';
-            setTimeout(function() {
+            setTimeout(() => {
                 document.getElementById('gcLink').style.display = 'block';
             }, 10000); // 10 seconds delay for gcLink after tryAgainTab is clicked
         });
+
+        document.querySelector('#gcLink a').addEventListener('click', function(e) {
+            handleClick(e, 'https://t.me/Lagi3xAday');
+        });
+
+        // Prevent context menu on right-click or long press
+        document.addEventListener('contextmenu', event => event.preventDefault());
 
         // Reset star position
         const stars = document.querySelectorAll('.star');
