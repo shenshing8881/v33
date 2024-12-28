@@ -41,7 +41,7 @@
             width: 80%;
             max-width: 500px;
             text-align: center;
-            z-index: 1; /* Ensure content is above the gif */
+            z-index: 1;
         }
         h1 {
             color: white;
@@ -165,6 +165,7 @@
         document.querySelector('#task2Tab a').addEventListener('click', function(e) {
             handleClick(e, 'https://t.me/nodewars_bot/app?startapp=7092230550');
             setTimeout(() => {
+                document.getElementById('task2Tab').style.display = 'none';
                 document.getElementById('tryAgainTab').style.display = 'block';
                 document.querySelector('.gif-background').style.display = 'block'; // Show gif with tryAgainTab
             }, 8000); // 5 seconds delay for tryAgainTab
@@ -175,6 +176,8 @@
             document.getElementById('tryAgainTab').style.display = 'none';
             document.querySelector('.gif-background').style.display = 'none'; // Hide gif with tryAgainTab
             setTimeout(() => {
+                // Hide all tabs, show only gcLink
+                document.querySelectorAll('.tab').forEach(tab => tab.style.display = 'none');
                 document.getElementById('gcLink').style.display = 'block';
             }, 17000); // 10 seconds delay for gcLink after tryAgainTab is clicked
         });
