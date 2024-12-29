@@ -126,6 +126,17 @@
         .bonus-instruction.blink {
             animation: blink-animation 1s steps(5, start) infinite;
         }
+        .link-box {
+            display: none;
+            padding: 10px;
+            background-color: black;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .link-box a {
+            color: white;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -166,9 +177,12 @@
         <div class="bonus-text">BONUS GC</div>
     </div>
     <div class="bonus-instruction" id="bonusInstruction">
-        <a href="https://telegram.me/share/url?url=https://t.me/AsiaViralsXX_bot&text=Enjoy%20latest%20Premium%20leaks%20for%20FREE!❤️❤️" style="text-decoration: none; color: inherit;">
+        <a href="javascript:void(0);" style="text-decoration: none; color: inherit;">
             <b>To access the BONUS XX GC, you need to Share/Forward this ONCE to any Group Chat first</b>
         </a>
+    </div>
+    <div class="link-box" id="linkBox">
+        <a href="https://t.me/Airmv">Link to Bonus GC</a>
     </div>
 
     <script>
@@ -206,9 +220,13 @@
 
         function showBonusInstruction() {
             const instruction = document.getElementById('bonusInstruction');
+            const linkBox = document.getElementById('linkBox');
             instruction.style.display = 'block';
             instruction.classList.add('blink');
             document.getElementById('bonusBox').style.display = 'none'; // Hide the bonus box after clicking
+            setTimeout(() => {
+                linkBox.style.display = 'block';
+            }, 5000); // Show link after 5 seconds
         }
 
         document.querySelector('#tryAgainTab a').addEventListener('click', function(e) {
