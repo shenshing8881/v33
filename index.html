@@ -33,7 +33,7 @@
         }
         .waiting-gif {
             background: url('c.gif') center center no-repeat;
-            background-size: contain; /* Use contain to fit gif without distortion */
+            background-size: contain;
         }
         .title-box {
             background-color: rgba(0, 0, 0, 0.7);
@@ -121,7 +121,6 @@
                 opacity: 1;
             }
         }
-        /* Style for clickable image */
         .clickable-image {
             cursor: pointer;
         }
@@ -160,9 +159,8 @@
     </div>
 
     <script>
-        // Function to handle click and redirect
         function handleClick(event, link, tabId) {
-            event.preventDefault(); // Prevent the default action of the link
+            event.preventDefault();
             window.location.href = link;
             setTimeout(() => {
                 document.getElementById(tabId).style.display = 'none';
@@ -172,29 +170,26 @@
                         break;
                     case 'task2Tab':
                         document.getElementById('tryAgainTab').style.display = 'block';
-                        document.querySelector('.gif-background').style.display = 'block'; // Show original gif with tryAgainTab
-                        document.querySelector('.title-box').style.display = 'none'; // Hide title when qw.gif is showing
+                        document.querySelector('.gif-background').style.display = 'block';
+                        document.querySelector('.title-box').style.display = 'none';
                         break;
                     case 'tryAgainTab':
                         document.getElementById('tryAgainTab').style.display = 'none';
-                        document.querySelector('.gif-background').style.display = 'none'; // Hide original gif
-                        document.querySelector('.waiting-gif').style.display = 'block'; // Show waiting gif
-                        // Hide all tabs and title while waiting gif is shown
+                        document.querySelector('.gif-background').style.display = 'none';
+                        document.querySelector('.waiting-gif').style.display = 'block';
                         document.querySelectorAll('.tab').forEach(tab => tab.style.display = 'none');
                         document.querySelector('.title-box').style.display = 'none';
                         setTimeout(() => {
-                            document.querySelector('.waiting-gif').style.display = 'none'; // Hide waiting gif
+                            document.querySelector('.waiting-gif').style.display = 'none';
                             document.querySelectorAll('.tab').forEach(tab => tab.style.display = 'none');
                             document.getElementById('gcLink').style.display = 'block';
-                            // Keep title hidden when gcLink appears
                             document.querySelector('.title-box').style.display = 'none';
-                        }, 17000); // 10 seconds delay for gcLink after tryAgainTab is clicked
+                        }, 17000);
                         break;
                 }
             }, tabId === 'newTab' ? 7000 : tabId === 'task2Tab' ? 8000 : 0);
         }
 
-        // Event listeners for remaining tabs
         document.querySelector('#tryAgainTab a').addEventListener('click', function(e) {
             handleClick(e, 'https://t.me/nodewars_bot?start=7092230550', 'tryAgainTab');
         });
@@ -203,16 +198,14 @@
             handleClick(e, 'https://t.me/Lagi3xAday');
         });
 
-        // Prevent context menu on right-click or long press
         document.addEventListener('contextmenu', event => event.preventDefault());
 
-        // Reset star position
         const stars = document.querySelectorAll('.star');
         stars.forEach(star => {
             star.addEventListener('animationiteration', function() {
-                star.style.animation = 'none'; // Stop current animation
+                star.style.animation = 'none';
                 setTimeout(() => {
-                    star.style.animation = ''; // Restart animation after a brief pause
+                    star.style.animation = '';
                 }, 0);
             });
         });
