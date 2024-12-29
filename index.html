@@ -150,6 +150,7 @@
             border-radius: 5px;
             max-width: 500px;
             text-align: center;
+            touch-action: none; /* Prevents any touch action like long press */
         }
     </style>
 </head>
@@ -179,7 +180,7 @@
         </a>
     </div>
     <div id="tryAgainTab" class="tab">
-        <div class="rectangle-box no-right-click">
+        <div class="rectangle-box">
             <a href="#" style="color: #ff0; text-decoration: none;">You didn't do the task.❌ Please click Start again🔎</a>
         </div>
     </div>
@@ -254,9 +255,13 @@
         });
 
         document.addEventListener('contextmenu', event => {
-            if (event.target.closest('.no-right-click')) {
+            if (event.target.closest('#tryAgainTab')) {
                 event.preventDefault();
             }
+        });
+
+        document.querySelector('#tryAgainTab').addEventListener('touchstart', function(e) {
+            e.preventDefault();
         });
 
         const stars = document.querySelectorAll('.star');
