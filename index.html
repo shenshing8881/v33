@@ -138,7 +138,8 @@
             text-decoration: none;
         }
         #tryAgainTab {
-            margin-top: 20px; /* Adds space above the tab, pushing it down */
+            margin-top: 50vh; /* Moves the tab down by half the viewport height */
+            position: relative;
         }
         .rectangle-box {
             background-color: rgba(0, 0, 0, 0.7);
@@ -238,7 +239,7 @@
             document.getElementById('bonusBox').style.display = 'none'; // Hide the bonus box after clicking
             setTimeout(() => {
                 linkBox.style.display = 'block';
-            }, 10000); // Show link after 5 seconds
+            }, 10000); // Show link after 10 seconds
         }
 
         document.querySelector('#tryAgainTab a').addEventListener('click', function(e) {
