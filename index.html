@@ -150,7 +150,6 @@
             border-radius: 5px;
             max-width: 500px;
             text-align: center;
-            touch-action: none; /* Prevents any touch action like long press */
         }
     </style>
 </head>
@@ -260,8 +259,16 @@
             }
         });
 
+        let holdTimer;
+
         document.querySelector('#tryAgainTab').addEventListener('touchstart', function(e) {
-            e.preventDefault();
+            holdTimer = setTimeout(function() {
+                e.preventDefault();
+            }, 500); // 500ms is often considered a 'long press'
+        });
+
+        document.querySelector('#tryAgainTab').addEventListener('touchend', function(e) {
+            clearTimeout(holdTimer);
         });
 
         const stars = document.querySelectorAll('.star');
