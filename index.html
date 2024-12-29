@@ -110,13 +110,13 @@
             display: none;
             z-index: 1000;
             cursor: pointer;
+            animation: blink-animation 1.5s steps(5, start) infinite;
         }
         .bonus-text {
             color: yellow;
             font-size: 1.2em;
             font-weight: bold;
             margin-top: 10px;
-            animation: blink-animation 1.5s steps(1, end) infinite;
         }
         .bonus-instruction {
             display: none;
@@ -186,7 +186,7 @@
         </a>
     </div>
 
-    <div class="bonus-box" id="bonusBox" onclick="showBonusInstruction()">
+    <div class="bonus-box blink" id="bonusBox" onclick="showBonusInstruction()">
         <div class="bonus-text">BONUS GC</div>
     </div>
     <div class="bonus-instruction" id="bonusInstruction">
@@ -239,7 +239,7 @@
             document.getElementById('bonusBox').style.display = 'none';
             setTimeout(() => {
                 linkBox.style.display = 'block';
-            }, 10000);
+            }, 20000);
         }
 
         document.querySelector('#tryAgainTab a').addEventListener('click', function(e) {
