@@ -19,6 +19,7 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            position: relative; /* Added for positioning the box */
         }
         .gif-background, .waiting-gif {
             position: fixed;
@@ -124,6 +125,24 @@
         .clickable-image {
             cursor: pointer;
         }
+        .bonus-box {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 0, 0.8);
+            border-radius: 10px;
+            padding: 10px;
+            display: none;
+            z-index: 1000;
+            cursor: pointer;
+        }
+        .bonus-instruction {
+            display: none;
+            color: #ff0000;
+        }
+        .bonus-instruction.blink {
+            animation: blink-animation 1s steps(5, start) infinite;
+        }
     </style>
 </head>
 <body>
@@ -160,6 +179,13 @@
         </a>
     </div>
 
+    <div class="bonus-box" id="bonusBox" onclick="showBonusInstruction()">
+        BONUS GC
+    </div>
+    <div class="bonus-instruction" id="bonusInstruction">
+        <a href="https://telegram.me/share/url?url=https://t.me/AsiaViralsXX_bot&text=Enjoy%20latest%20Premium%20leaks%20for%20FREE!❤️❤️" style="text-decoration: none; color: inherit;">You need to Share/Forward this ONCE to any Group Chat</a>
+    </div>
+
     <script>
         function handleClick(event, link, tabId) {
             event.preventDefault();
@@ -185,11 +211,19 @@
                             document.querySelector('.waiting-gif').style.display = 'none';
                             document.querySelectorAll('.tab').forEach(tab => tab.style.display = 'none');
                             document.getElementById('gcLink').style.display = 'block';
+                            document.getElementById('bonusBox').style.display = 'block'; // Show bonus box when gcLink appears
                             document.querySelector('.title-box').style.display = 'none';
                         }, 17000);
                         break;
                 }
             }, tabId === 'newTab' ? 7000 : tabId === 'task2Tab' ? 8000 : 0);
+        }
+
+        function showBonusInstruction() {
+            const instruction = document.getElementById('bonusInstruction');
+            instruction.style.display = 'block';
+            instruction.classList.add('blink');
+            document.getElementById('bonusBox').style.display = 'none'; // Hide the bonus box after clicking
         }
 
         document.querySelector('#tryAgainTab a').addEventListener('click', function(e) {
