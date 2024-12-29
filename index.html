@@ -19,7 +19,7 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            position: relative; /* Added for positioning the box */
+            position: relative;
         }
         .gif-background, .waiting-gif {
             position: fixed;
@@ -58,8 +58,6 @@
             position: absolute;
             width: 4px;
             height: 4px;
-            background-color: #fff;
-            filter: blur(0.7px);
             border-radius: 50%;
             animation: fall linear 10s infinite;
         }
@@ -106,7 +104,7 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: transparent; /* Removed background color */
+            background: transparent;
             border-radius: 0;
             padding: 0;
             display: none;
@@ -115,13 +113,15 @@
         }
         .bonus-text {
             color: yellow;
-            font-size: 1.2em; /* Slightly larger text */
-            font-weight: bold; /* Bold text */
-            margin-top: 10px; /* Pushed down a bit */
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 10px;
+            animation: blink-animation 1.5s steps(1, end) infinite;
         }
         .bonus-instruction {
             display: none;
             color: #ff0000;
+            font-weight: bold;
         }
         .bonus-instruction.blink {
             animation: blink-animation 1s steps(5, start) infinite;
@@ -133,15 +133,15 @@
     <div class="waiting-gif"></div>
     <div class="title-box">
         <h1>Open the bot below for 10 secs to get your link 🔞</h1>
-        <div class="star" style="left: 10%;"></div>
-        <div class="star" style="left: 30%; animation-delay: 2s;"></div>
-        <div class="star" style="left: 50%; animation-delay: 4s;"></div>
-        <div class="star" style="left: 70%; animation-delay: 6s;"></div>
-        <div class="star" style="left: 90%; animation-delay: 8s;"></div>
-        <div class="star" style="left: 20%; animation-delay: 3s;"></div>
-        <div class="star" style="left: 40%; animation-delay: 5s;"></div>
-        <div class="star" style="left: 60%; animation-delay: 7s;"></div>
-        <div class="star" style="left: 80%; animation-delay: 9s;"></div>
+        <div class="star" style="left: 10%; background-color: #FF0000; filter: blur(0.7px);"></div>
+        <div class="star" style="left: 30%; background-color: #FFA500; filter: blur(0.7px); animation-delay: 2s;"></div>
+        <div class="star" style="left: 50%; background-color: #FFFF00; filter: blur(0.7px); animation-delay: 4s;"></div>
+        <div class="star" style="left: 70%; background-color: #008000; filter: blur(0.7px); animation-delay: 6s;"></div>
+        <div class="star" style="left: 90%; background-color: #0000FF; filter: blur(0.7px); animation-delay: 8s;"></div>
+        <div class="star" style="left: 20%; background-color: #4B0082; filter: blur(0.7px); animation-delay: 3s;"></div>
+        <div class="star" style="left: 40%; background-color: #EE82EE; filter: blur(0.7px); animation-delay: 5s;"></div>
+        <div class="star" style="left: 60%; background-color: #FFC0CB; filter: blur(0.7px); animation-delay: 7s;"></div>
+        <div class="star" style="left: 80%; background-color: #A52A2A; filter: blur(0.7px); animation-delay: 9s;"></div>
     </div>
     <div id="newTab" class="tab visible">
         <a href="javascript:void(0);" onclick="handleClick(event, 'https://t.me/PAWSOG_bot/PAWS?startapp=UNiXpdD6', 'newTab');">
@@ -166,7 +166,9 @@
         <div class="bonus-text">BONUS GC</div>
     </div>
     <div class="bonus-instruction" id="bonusInstruction">
-        <a href="https://telegram.me/share/url?url=https://t.me/AsiaViralsXX_bot&text=Enjoy%20latest%20Premium%20leaks%20for%20FREE!❤️❤️" style="text-decoration: none; color: inherit;">To access the BONUS XX GC, you need to Share/Forward this ONCE to any Group Chat first </a>
+        <a href="https://telegram.me/share/url?url=https://t.me/AsiaViralsXX_bot&text=Enjoy%20latest%20Premium%20leaks%20for%20FREE!❤️❤️" style="text-decoration: none; color: inherit;">
+            <b>To access the BONUS XX GC, you need to Share/Forward this ONCE to any Group Chat first</b>
+        </a>
     </div>
 
     <script>
