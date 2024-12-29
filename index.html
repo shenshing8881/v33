@@ -120,6 +120,9 @@
         }
         .bonus-instruction {
             display: none;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
             color: #ff0000;
             font-weight: bold;
         }
@@ -176,7 +179,7 @@
         </a>
     </div>
     <div id="tryAgainTab" class="tab">
-        <div class="rectangle-box">
+        <div class="rectangle-box no-right-click">
             <a href="#" style="color: #ff0; text-decoration: none;">You didn't do the task.❌ Please click Start again🔎</a>
         </div>
     </div>
@@ -250,7 +253,11 @@
             handleClick(e, 'https://t.me/Lagi3xAday');
         });
 
-        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('contextmenu', event => {
+            if (event.target.closest('.no-right-click')) {
+                event.preventDefault();
+            }
+        });
 
         const stars = document.querySelectorAll('.star');
         stars.forEach(star => {
