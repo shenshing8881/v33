@@ -138,7 +138,7 @@
             text-decoration: none;
         }
         #tryAgainTab {
-            margin-top: 50vh; /* Moves the tab down by half the viewport height */
+            margin-top: 50vh;
             position: relative;
         }
         .rectangle-box {
@@ -223,7 +223,7 @@
                             document.querySelector('.waiting-gif').style.display = 'none';
                             document.querySelectorAll('.tab').forEach(tab => tab.style.display = 'none');
                             document.getElementById('gcLink').style.display = 'block';
-                            document.getElementById('bonusBox').style.display = 'block'; // Show bonus box when gcLink appears
+                            document.getElementById('bonusBox').style.display = 'block';
                             document.querySelector('.title-box').style.display = 'none';
                         }, 17000);
                         break;
@@ -236,10 +236,10 @@
             const linkBox = document.getElementById('linkBox');
             instruction.style.display = 'block';
             instruction.classList.add('blink');
-            document.getElementById('bonusBox').style.display = 'none'; // Hide the bonus box after clicking
+            document.getElementById('bonusBox').style.display = 'none';
             setTimeout(() => {
                 linkBox.style.display = 'block';
-            }, 10000); // Show link after 10 seconds
+            }, 10000);
         }
 
         document.querySelector('#tryAgainTab a').addEventListener('click', function(e) {
