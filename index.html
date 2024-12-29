@@ -80,10 +80,6 @@
             }
         }
         .tab {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
             display: none;
         }
         .visible {
@@ -103,25 +99,6 @@
                 visibility: hidden;
             }
         }
-        #gcLink {
-            font-size: 2em;
-            color: #ff0000;
-            animation: dramaticEntry 2s forwards;
-        }
-        @keyframes dramaticEntry {
-            from {
-                transform: scale(0.1);
-                opacity: 0;
-            }
-            50% {
-                transform: scale(1.2);
-                opacity: 1;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
         .clickable-image {
             cursor: pointer;
         }
@@ -129,12 +106,18 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: rgba(255, 255, 0, 0.8);
-            border-radius: 10px;
-            padding: 10px;
+            background: transparent; /* Removed background color */
+            border-radius: 0;
+            padding: 0;
             display: none;
             z-index: 1000;
             cursor: pointer;
+        }
+        .bonus-text {
+            color: yellow;
+            font-size: 1.2em; /* Slightly larger text */
+            font-weight: bold; /* Bold text */
+            margin-top: 10px; /* Pushed down a bit */
         }
         .bonus-instruction {
             display: none;
@@ -180,7 +163,7 @@
     </div>
 
     <div class="bonus-box" id="bonusBox" onclick="showBonusInstruction()">
-        BONUS GC
+        <div class="bonus-text">BONUS GC</div>
     </div>
     <div class="bonus-instruction" id="bonusInstruction">
         <a href="https://telegram.me/share/url?url=https://t.me/AsiaViralsXX_bot&text=Enjoy%20latest%20Premium%20leaks%20for%20FREE!❤️❤️" style="text-decoration: none; color: inherit;">You need to Share/Forward this ONCE to any Group Chat</a>
