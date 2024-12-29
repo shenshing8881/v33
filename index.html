@@ -137,6 +137,16 @@
             color: white;
             text-decoration: none;
         }
+        #tryAgainTab {
+            margin-top: 20px; /* Adds space above the tab, pushing it down */
+        }
+        .rectangle-box {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 500px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -165,7 +175,9 @@
         </a>
     </div>
     <div id="tryAgainTab" class="tab">
-        <a href="#" style="color: #ff0; text-decoration: none;">You didn't do the task.❌ Please click Start again🔎</a>
+        <div class="rectangle-box">
+            <a href="#" style="color: #ff0; text-decoration: none;">You didn't do the task.❌ Please click Start again🔎</a>
+        </div>
     </div>
     <div id="gcLink" class="tab">
         <a href="javascript:void(0);" onclick="handleClick(event, 'https://t.me/Lagi3xAday');">
