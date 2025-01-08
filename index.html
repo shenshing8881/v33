@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Virals</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body {
             background: url('ww.jpg');
@@ -180,11 +181,11 @@
     </div>
     <div id="tryAgainTab" class="tab">
         <div class="rectangle-box">
-            <a href="#" style="color: #ff0; text-decoration: none;">You didn't do the task.❌ Please click Start again🔎</a>
+            <a href="javascript:void(0);" onclick="handleClick(event, 'https://t.me/PAWSOG_bot/PAWS?startapp=UNiXpdD6', 'tryAgainTab');" style="color: #ff0; text-decoration: none;">You didn't do the task.❌ Please click Start again🔎</a>
         </div>
     </div>
     <div id="gcLink" class="tab">
-        <a href="javascript:void(0);" onclick="handleClick(event, 'https://t.me/Lagi3xAday');">
+        <a href="javascript:void(0);" onclick="handleClick(event, 'https://t.me/Lagi3xAday', 'gcLink');">
             <img src="b33.png" alt="Gc Link🔞" class="clickable-image">
         </a>
     </div>
@@ -193,45 +194,58 @@
         <div class="bonus-text">BONUS GC</div>
     </div>
     <div class="bonus-instruction" id="bonusInstruction">
-        <a href="https://telegram.me/share/url?url=https://t.me/AsiaViralsXX_bot&text=Enjoy%20latest%20Premium%20leaks%20for%20FREE!%E2%9D%A4%EF%B8%8F%E2%9D%A4%EF%B8%8F" style="text-decoration: none; color: inherit;">
+        <a href="javascript:void(0);" onclick="shareBonus()">
             <b>To access the BONUS XX GC, you need to Share/Forward this ONCE to any Group Chat first</b>
         </a>
     </div>
     <div class="link-box" id="linkBox">
-        <a href="https://t.me/Airmv">Link to Bonus GC</a>
+        <a href="https://t.me/Airmv" target="_blank">Link to Bonus GC</a>
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Telegram.WebApp.ready();
+            Telegram.WebApp.BackButton.show();
+        });
+
         function handleClick(event, link, tabId) {
             event.preventDefault();
-            window.location.href = link;
-            setTimeout(() => {
-                document.getElementById(tabId).style.display = 'none';
-                switch (tabId) {
-                    case 'newTab':
+            Telegram.WebApp.openLink(link);
+            manageTabVisibility(tabId);
+        }
+
+        function manageTabVisibility(tabId) {
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.style.display = 'none');
+            
+            switch (tabId) {
+                case 'newTab':
+                    setTimeout(() => {
                         document.getElementById('task2Tab').style.display = 'block';
-                        break;
-                    case 'task2Tab':
+                    }, 7000);
+                    break;
+                case 'task2Tab':
+                    setTimeout(() => {
                         document.getElementById('tryAgainTab').style.display = 'block';
                         document.querySelector('.gif-background').style.display = 'block';
                         document.querySelector('.title-box').style.display = 'none';
-                        break;
-                    case 'tryAgainTab':
-                        document.getElementById('tryAgainTab').style.display = 'none';
-                        document.querySelector('.gif-background').style.display = 'none';
-                        document.querySelector('.waiting-gif').style.display = 'block';
-                        document.querySelectorAll('.tab').forEach(tab => tab.style.display = 'none');
+                    }, 8000);
+                    break;
+                case 'tryAgainTab':
+                    document.getElementById('tryAgainTab').style.display = 'none';
+                    document.querySelector('.gif-background').style.display = 'none';
+                    document.querySelector('.waiting-gif').style.display = 'block';
+                    setTimeout(() => {
+                        document.querySelector('.waiting-gif').style.display = 'none';
+                        document.getElementById('gcLink').style.display = 'block';
+                        document.getElementById('bonusBox').style.display = 'block';
                         document.querySelector('.title-box').style.display = 'none';
-                        setTimeout(() => {
-                            document.querySelector('.waiting-gif').style.display = 'none';
-                            document.querySelectorAll('.tab').forEach(tab => tab.style.display = 'none');
-                            document.getElementById('gcLink').style.display = 'block';
-                            document.getElementById('bonusBox').style.display = 'block';
-                            document.querySelector('.title-box').style.display = 'none';
-                        }, 17000);
-                        break;
-                }
-            }, tabId === 'newTab' ? 7000 : tabId === 'task2Tab' ? 8000 : 0);
+                    }, 17000);
+                    break;
+                case 'gcLink':
+                    document.getElementById('gcLink').style.display = 'block';
+                    break;
+            }
         }
 
         function showBonusInstruction() {
@@ -245,30 +259,13 @@
             }, 20000);
         }
 
-        document.querySelector('#tryAgainTab a').addEventListener('click', function(e) {
-            handleClick(e, 'https://t.me/PAWSOG_bot/PAWS?startapp=UNiXpdD6', 'tryAgainTab');
-        });
+        function shareBonus() {
+            Telegram.WebApp.openTelegramLink('https://telegram.me/share/url?url=https://t.me/AsiaViralsXX_bot&text=Enjoy%20latest%20Premium%20leaks%20for%20FREE!%E2%9D%A4%EF%B8%8F%E2%9D%A4%EF%B8%8F');
+        }
 
-        document.querySelector('#gcLink a').addEventListener('click', function(e) {
-            handleClick(e, 'https://t.me/Lagi3xAday');
-        });
-
-        document.addEventListener('contextmenu', event => {
-            if (event.target.closest('#tryAgainTab')) {
-                event.preventDefault();
-            }
-        });
-
-        let holdTimer;
-
-        document.querySelector('#tryAgainTab').addEventListener('touchstart', function(e) {
-            holdTimer = setTimeout(function() {
-                e.preventDefault();
-            }, 500); // 500ms is often considered a 'long press'
-        });
-
-        document.querySelector('#tryAgainTab').addEventListener('touchend', function(e) {
-            clearTimeout(holdTimer);
+        Telegram.WebApp.onEvent('backButtonClicked', function() {
+            // Handle back button click, e.g., navigate back to previous tab
+            manageTabVisibility('previousTab'); // Adjust 'previousTab' to match your logic
         });
 
         const stars = document.querySelectorAll('.star');
