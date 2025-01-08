@@ -1,285 +1,281 @@
 ‎<!DOCTYPE html>
 ‎<html lang="en">
 ‎<head>
-‎    <meta charset="UTF-8">
-‎    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-‎    <title>Virals</title>
-‎    <style>
-‎        body {
-‎            background: url('ww.jpg');
-‎            background-size: cover;
-‎            background-repeat: no-repeat;
-‎            background-attachment: fixed;
-‎            font-family: Arial, sans-serif;
-‎            margin: 0;
-‎            padding: 0;
-‎            height: 100vh;
-‎            display: flex;
-‎            flex-direction: column;
-‎            justify-content: center;
-‎            align-items: center;
-‎            overflow: hidden;
-‎            position: relative;
-‎        }
-‎        .gif-background, .waiting-gif {
-‎            position: fixed;
-‎            top: 0;
-‎            left: 0;
-‎            width: 100%;
-‎            height: 100%;
-‎            background: url('qw.gif') center center no-repeat;
-‎            background-size: cover;
-‎            z-index: -1;
-‎            display: none;
-‎        }
-‎        .waiting-gif {
-‎            background: url('c.gif') center center no-repeat;
-‎            background-size: contain;
-‎        }
-‎        .title-box {
-‎            background-color: rgba(0, 0, 0, 0.7);
-‎            padding: 20px;
-‎            border-radius: 10px;
-‎            margin-bottom: 20px;
-‎            position: relative;
-‎            overflow: hidden;
-‎            width: 80%;
-‎            max-width: 500px;
-‎            text-align: center;
-‎            z-index: 1;
-‎        }
-‎        h1 {
-‎            color: white;
-‎            font-size: calc(1em - 1px);
-‎            position: relative;
-‎            z-index: 2;
-‎        }
-‎        .star {
-‎            position: absolute;
-‎            width: 4px;
-‎            height: 4px;
-‎            border-radius: 50%;
-‎            animation: fall linear 10s infinite;
-‎        }
-‎        @keyframes fall {
-‎            0% {
-‎                transform: translateY(-100px);
-‎                opacity: 0;
-‎            }
-‎            5% {
-‎                opacity: 1;
-‎            }
-‎            95% {
-‎                opacity: 1;
-‎            }
-‎            100% {
-‎                transform: translateY(calc(100vh + 100px));
-‎                opacity: 0;
-‎            }
-‎        }
-‎        .tab {
-‎            display: none;
-‎        }
-‎        .visible {
-‎            display: block;
-‎        }
-‎        .blink {
-‎            animation: blink-animation 1s steps(5, start) infinite;
-‎            -webkit-animation: blink-animation 1s steps(5, start) infinite;
-‎        }
-‎        @keyframes blink-animation {
-‎            to {
-‎                visibility: hidden;
-‎            }
-‎        }
-‎        @-webkit-keyframes blink-animation {
-‎            to {
-‎                visibility: hidden;
-‎            }
-‎        }
-‎        .clickable-image {
-‎            cursor: pointer;
-‎        }
-‎        .bonus-box {
-‎            position: fixed;
-‎            bottom: 20px;
-‎            right: 20px;
-‎            background: transparent;
-‎            border-radius: 0;
-‎            padding: 0;
-‎            display: none;
-‎            z-index: 1000;
-‎            cursor: pointer;
-‎            animation: blink-animation 1.5s steps(5, start) infinite;
-‎        }
-‎        .bonus-text {
-‎            color: yellow;
-‎            font-size: 1.2em;
-‎            font-weight: bold;
-‎            margin-top: 10px;
-‎        }
-‎        .bonus-instruction {
-‎            display: none;
-‎            background-color: rgba(0, 0, 0, 0.7);
-‎            padding: 10px;
-‎            border-radius: 5px;
-‎            color: #ff0000;
-‎            font-weight: bold;
-‎        }
-‎        .bonus-instruction.blink {
-‎            animation: blink-animation 1s steps(5, start) infinite;
-‎        }
-‎        .link-box {
-‎            display: none;
-‎            padding: 10px;
-‎            background-color: black;
-‎            border-radius: 5px;
-‎            margin-top: 10px;
-‎        }
-‎        .link-box a {
-‎            color: white;
-‎            text-decoration: none;
-‎        }
-‎        #tryAgainTab {
-‎            margin-top: 50vh;
-‎            position: relative;
-‎        }
-‎        .rectangle-box {
-‎            background-color: rgba(0, 0, 0, 0.7);
-‎            padding: 10px;
-‎            border-radius: 5px;
-‎            max-width: 500px;
-‎            text-align: center;
-‎        }
-‎    </style>
+‎    <meta charset="UTF-8">
+‎    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+‎    <title>Virals</title>
+‎    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+‎    <style>
+‎        body {
+‎            background: url('ww.jpg');
+‎            background-size: cover;
+‎            background-repeat: no-repeat;
+‎            background-attachment: fixed;
+‎            font-family: Arial, sans-serif;
+‎            margin: 0;
+‎            padding: 0;
+‎            height: 100vh;
+‎            display: flex;
+‎            flex-direction: column;
+‎            justify-content: center;
+‎            align-items: center;
+‎            overflow: hidden;
+‎            position: relative;
+‎        }
+‎        .gif-background, .waiting-gif {
+‎            position: fixed;
+‎            top: 0;
+‎            left: 0;
+‎            width: 100%;
+‎            height: 100%;
+‎            background: url('qw.gif') center center no-repeat;
+‎            background-size: cover;
+‎            z-index: -1;
+‎            display: none;
+‎        }
+‎        .waiting-gif {
+‎            background: url('c.gif') center center no-repeat;
+‎            background-size: contain;
+‎        }
+‎        .title-box {
+‎            background-color: rgba(0, 0, 0, 0.7);
+‎            padding: 20px;
+‎            border-radius: 10px;
+‎            margin-bottom: 20px;
+‎            position: relative;
+‎            overflow: hidden;
+‎            width: 80%;
+‎            max-width: 500px;
+‎            text-align: center;
+‎            z-index: 1;
+‎        }
+‎        h1 {
+‎            color: white;
+‎            font-size: calc(1em - 1px);
+‎            position: relative;
+‎            z-index: 2;
+‎        }
+‎        .star {
+‎            position: absolute;
+‎            width: 4px;
+‎            height: 4px;
+‎            border-radius: 50%;
+‎            animation: fall linear 10s infinite;
+‎        }
+‎        @keyframes fall {
+‎            0% {
+‎                transform: translateY(-100px);
+‎                opacity: 0;
+‎            }
+‎            5% {
+‎                opacity: 1;
+‎            }
+‎            95% {
+‎                opacity: 1;
+‎            }
+‎            100% {
+‎                transform: translateY(calc(100vh + 100px));
+‎                opacity: 0;
+‎            }
+‎        }
+‎        .tab {
+‎            display: none;
+‎        }
+‎        .visible {
+‎            display: block;
+‎        }
+‎        .blink {
+‎            animation: blink-animation 1s steps(5, start) infinite;
+‎            -webkit-animation: blink-animation 1s steps(5, start) infinite;
+‎        }
+‎        @keyframes blink-animation {
+‎            to {
+‎                visibility: hidden;
+‎            }
+‎        }
+‎        @-webkit-keyframes blink-animation {
+‎            to {
+‎                visibility: hidden;
+‎            }
+‎        }
+‎        .clickable-image {
+‎            cursor: pointer;
+‎        }
+‎        .bonus-box {
+‎            position: fixed;
+‎            bottom: 20px;
+‎            right: 20px;
+‎            background: transparent;
+‎            border-radius: 0;
+‎            padding: 0;
+‎            display: none;
+‎            z-index: 1000;
+‎            cursor: pointer;
+‎            animation: blink-animation 1.5s steps(5, start) infinite;
+‎        }
+‎        .bonus-text {
+‎            color: yellow;
+‎            font-size: 1.2em;
+‎            font-weight: bold;
+‎            margin-top: 10px;
+‎        }
+‎        .bonus-instruction {
+‎            display: none;
+‎            background-color: rgba(0, 0, 0, 0.7);
+‎            padding: 10px;
+‎            border-radius: 5px;
+‎            color: #ff0000;
+‎            font-weight: bold;
+‎        }
+‎        .bonus-instruction.blink {
+‎            animation: blink-animation 1s steps(5, start) infinite;
+‎        }
+‎        .link-box {
+‎            display: none;
+‎            padding: 10px;
+‎            background-color: black;
+‎            border-radius: 5px;
+‎            margin-top: 10px;
+‎        }
+‎        .link-box a {
+‎            color: white;
+‎            text-decoration: none;
+‎        }
+‎        #tryAgainTab {
+‎            margin-top: 50vh;
+‎            position: relative;
+‎        }
+‎        .rectangle-box {
+‎            background-color: rgba(0, 0, 0, 0.7);
+‎            padding: 10px;
+‎            border-radius: 5px;
+‎            max-width: 500px;
+‎            text-align: center;
+‎        }
+‎    </style>
 ‎</head>
 ‎<body>
-‎    <div class="gif-background"></div>
-‎    <div class="waiting-gif"></div>
-‎    <div class="title-box">
-‎        <h1>Open the bot below for 10 secs to get your link 🔞</h1>
-‎        <div class="star" style="left: 10%; background-color: #FF0000; filter: blur(0.7px);"></div>
-‎        <div class="star" style="left: 30%; background-color: #FFA500; filter: blur(0.7px); animation-delay: 2s;"></div>
-‎        <div class="star" style="left: 50%; background-color: #FFFF00; filter: blur(0.7px); animation-delay: 4s;"></div>
-‎        <div class="star" style="left: 70%; background-color: #008000; filter: blur(0.7px); animation-delay: 6s;"></div>
-‎        <div class="star" style="left: 90%; background-color: #0000FF; filter: blur(0.7px); animation-delay: 8s;"></div>
-‎        <div class="star" style="left: 20%; background-color: #4B0082; filter: blur(0.7px); animation-delay: 3s;"></div>
-‎        <div class="star" style="left: 40%; background-color: #EE82EE; filter: blur(0.7px); animation-delay: 5s;"></div>
-‎        <div class="star" style="left: 60%; background-color: #FFC0CB; filter: blur(0.7px); animation-delay: 7s;"></div>
-‎        <div class="star" style="left: 80%; background-color: #A52A2A; filter: blur(0.7px); animation-delay: 9s;"></div>
-‎    </div>
-‎    <div id="newTab" class="tab visible">
-‎        <a href="javascript:void(0);" onclick="handleClick(event, 'https://t.me/sigmatonbot/app?startapp=ref_39aj446', 'newTab');">
-‎            <img src="b1.png" alt="Click Start" class="clickable-image">
-‎        </a>
-‎    </div>
-‎    <div id="task2Tab" class="tab">
-‎        <a href="javascript:void(0);" onclick="handleClick(event, 'https://t.me/TrumpsEmpireBot?start=friend=7092230550=adjust=1h9jgqbc', 'task2Tab');">
-‎            <img src="b2.png" alt="Click Start (1/1)" class="clickable-image">
-‎        </a>
-‎    </div>
-‎    <div id="tryAgainTab" class="tab">
-‎        <div class="rectangle-box">
-‎            <a href="#" style="color: #ff0; text-decoration: none;">You didn't do the task.❌ Please click Start again🔎</a>
-‎        </div>
-‎    </div>
-‎    <div id="gcLink" class="tab">
-‎        <a href="javascript:void(0);" onclick="handleClick(event, 'https://t.me/Lagi3xAday');">
-‎            <img src="b33.png" alt="Gc Link🔞" class="clickable-image">
-‎        </a>
-‎    </div>
+‎    <div class="gif-background"></div>
+‎    <div class="waiting-gif"></div>
+‎    <div class="title-box">
+‎        <h1>Open the bot below for 10 secs to get your link 🔞</h1>
+‎        <div class="star" style="left: 10%; background-color: #FF0000; filter: blur(0.7px);"></div>
+‎        <div class="star" style="left: 30%; background-color: #FFA500; filter: blur(0.7px); animation-delay: 2s;"></div>
+‎        <div class="star" style="left: 50%; background-color: #FFFF00; filter: blur(0.7px); animation-delay: 4s;"></div>
+‎        <div class="star" style="left: 70%; background-color: #008000; filter: blur(0.7px); animation-delay: 6s;"></div>
+‎        <div class="star" style="left: 90%; background-color: #0000FF; filter: blur(0.7px); animation-delay: 8s;"></div>
+‎        <div class="star" style="left: 20%; background-color: #4B0082; filter: blur(0.7px); animation-delay: 3s;"></div>
+‎        <div class="star" style="left: 40%; background-color: #EE82EE; filter: blur(0.7px); animation-delay: 5s;"></div>
+‎        <div class="star" style="left: 60%; background-color: #FFC0CB; filter: blur(0.7px); animation-delay: 7s;"></div>
+‎        <div class="star" style="left: 80%; background-color: #A52A2A; filter: blur(0.7px); animation-delay: 9s;"></div>
+‎    </div>
+‎    <div id="newTab" class="tab visible">
+‎        <a href="javascript:void(0);" onclick="handleClick(event, 'https://t.me/sigmatonbot/app?startapp=ref_39aj446', 'newTab');">
+‎            <img src="b1.png" alt="Click Start" class="clickable-image">
+‎        </a>
+‎    </div>
+‎    <div id="task2Tab" class="tab">
+‎        <a href="javascript:void(0);" onclick="handleClick(event, 'https://t.me/TrumpsEmpireBot?start=friend=7092230550=adjust=1h9jgqbc', 'task2Tab');">
+‎            <img src="b2.png" alt="Click Start (1/1)" class="clickable-image">
+‎        </a>
+‎    </div>
+‎    <div id="tryAgainTab" class="tab">
+‎        <div class="rectangle-box">
+‎            <a href="javascript:void(0);" onclick="handleClick(event, 'https://t.me/PAWSOG_bot/PAWS?startapp=UNiXpdD6', 'tryAgainTab');" style="color: #ff0; text-decoration: none;">You didn't do the task.❌ Please click Start again🔎</a>
+‎        </div>
+‎    </div>
+‎    <div id="gcLink" class="tab">
+‎        <a href="javascript:void(0);" onclick="handleClick(event, 'https://t.me/Lagi3xAday', 'gcLink');">
+‎            <img src="b33.png" alt="Gc Link🔞" class="clickable-image">
+‎        </a>
+‎    </div>
 ‎
-‎    <div class="bonus-box blink" id="bonusBox" onclick="showBonusInstruction()">
-‎        <div class="bonus-text">BONUS GC</div>
-‎    </div>
-‎    <div class="bonus-instruction" id="bonusInstruction">
-‎        <a href="https://telegram.me/share/url?url=https://t.me/AsiaViralsXX_bot&text=Enjoy%20latest%20Premium%20leaks%20for%20FREE!%E2%9D%A4%EF%B8%8F%E2%9D%A4%EF%B8%8F" style="text-decoration: none; color: inherit;">
-‎            <b>To access the BONUS XX GC, you need to Share/Forward this ONCE to any Group Chat first</b>
-‎        </a>
-‎    </div>
-‎    <div class="link-box" id="linkBox">
-‎        <a href="https://t.me/Airmv">Link to Bonus GC</a>
-‎    </div>
+‎    <div class="bonus-box blink" id="bonusBox" onclick="showBonusInstruction()">
+‎        <div class="bonus-text">BONUS GC</div>
+‎    </div>
+‎    <div class="bonus-instruction" id="bonusInstruction">
+‎        <a href="javascript:void(0);" onclick="shareBonus()">
+‎            <b>To access the BONUS XX GC, you need to Share/Forward this ONCE to any Group Chat first</b>
+‎        </a>
+‎    </div>
+‎    <div class="link-box" id="linkBox">
+‎        <a href="https://t.me/Airmv" target="_blank">Link to Bonus GC</a>
+‎    </div>
 ‎
-‎    <script>
-‎        function handleClick(event, link, tabId) {
-‎            event.preventDefault();
-‎            window.location.href = link;
-‎            setTimeout(() => {
-‎                document.getElementById(tabId).style.display = 'none';
-‎                switch (tabId) {
-‎                    case 'newTab':
-‎                        document.getElementById('task2Tab').style.display = 'block';
-‎                        break;
-‎                    case 'task2Tab':
-‎                        document.getElementById('tryAgainTab').style.display = 'block';
-‎                        document.querySelector('.gif-background').style.display = 'block';
-‎                        document.querySelector('.title-box').style.display = 'none';
-‎                        break;
-‎                    case 'tryAgainTab':
-‎                        document.getElementById('tryAgainTab').style.display = 'none';
-‎                        document.querySelector('.gif-background').style.display = 'none';
-‎                        document.querySelector('.waiting-gif').style.display = 'block';
-‎                        document.querySelectorAll('.tab').forEach(tab => tab.style.display = 'none');
-‎                        document.querySelector('.title-box').style.display = 'none';
-‎                        setTimeout(() => {
-‎                            document.querySelector('.waiting-gif').style.display = 'none';
-‎                            document.querySelectorAll('.tab').forEach(tab => tab.style.display = 'none');
-‎                            document.getElementById('gcLink').style.display = 'block';
-‎                            document.getElementById('bonusBox').style.display = 'block';
-‎                            document.querySelector('.title-box').style.display = 'none';
-‎                        }, 17000);
-‎                        break;
-‎                }
-‎            }, tabId === 'newTab' ? 7000 : tabId === 'task2Tab' ? 8000 : 0);
-‎        }
+‎    <script>
+‎        document.addEventListener('DOMContentLoaded', function() {
+‎            Telegram.WebApp.ready();
+‎            Telegram.WebApp.BackButton.show();
+‎        });
 ‎
-‎        function showBonusInstruction() {
-‎            const instruction = document.getElementById('bonusInstruction');
-‎            const linkBox = document.getElementById('linkBox');
-‎            instruction.style.display = 'block';
-‎            instruction.classList.add('blink');
-‎            document.getElementById('bonusBox').style.display = 'none';
-‎            setTimeout(() => {
-‎                linkBox.style.display = 'block';
-‎            }, 20000);
-‎        }
+‎        function handleClick(event, link, tabId) {
+‎            event.preventDefault();
+‎            Telegram.WebApp.openLink(link);
+‎            manageTabVisibility(tabId);
+‎        }
 ‎
-‎        document.querySelector('#tryAgainTab a').addEventListener('click', function(e) {
-‎            handleClick(e, 'https://t.me/PAWSOG_bot/PAWS?startapp=UNiXpdD6', 'tryAgainTab');
-‎        });
+‎        function manageTabVisibility(tabId) {
+‎            const tabs = document.querySelectorAll('.tab');
+‎            tabs.forEach(tab => tab.style.display = 'none');
+‎            
+‎            switch (tabId) {
+‎                case 'newTab':
+‎                    setTimeout(() => {
+‎                        document.getElementById('task2Tab').style.display = 'block';
+‎                    }, 7000);
+‎                    break;
+‎                case 'task2Tab':
+‎                    setTimeout(() => {
+‎                        document.getElementById('tryAgainTab').style.display = 'block';
+‎                        document.querySelector('.gif-background').style.display = 'block';
+‎                        document.querySelector('.title-box').style.display = 'none';
+‎                    }, 8000);
+‎                    break;
+‎                case 'tryAgainTab':
+‎                    document.getElementById('tryAgainTab').style.display = 'none';
+‎                    document.querySelector('.gif-background').style.display = 'none';
+‎                    document.querySelector('.waiting-gif').style.display = 'block';
+‎                    setTimeout(() => {
+‎                        document.querySelector('.waiting-gif').style.display = 'none';
+‎                        document.getElementById('gcLink').style.display = 'block';
+‎                        document.getElementById('bonusBox').style.display = 'block';
+‎                        document.querySelector('.title-box').style.display = 'none';
+‎                    }, 17000);
+‎                    break;
+‎                case 'gcLink':
+‎                    document.getElementById('gcLink').style.display = 'block';
+‎                    break;
+‎            }
+‎        }
 ‎
-‎        document.querySelector('#gcLink a').addEventListener('click', function(e) {
-‎            handleClick(e, 'https://t.me/Lagi3xAday');
-‎        });
+‎        function showBonusInstruction() {
+‎            const instruction = document.getElementById('bonusInstruction');
+‎            const linkBox = document.getElementById('linkBox');
+‎            instruction.style.display = 'block';
+‎            instruction.classList.add('blink');
+‎            document.getElementById('bonusBox').style.display = 'none';
+‎            setTimeout(() => {
+‎                linkBox.style.display = 'block';
+‎            }, 20000);
+‎        }
 ‎
-‎        document.addEventListener('contextmenu', event => {
-‎            if (event.target.closest('#tryAgainTab')) {
-‎                event.preventDefault();
-‎            }
-‎        });
+‎        function shareBonus() {
+‎            Telegram.WebApp.openTelegramLink('https://telegram.me/share/url?url=https://t.me/AsiaViralsXX_bot&text=Enjoy latest Premium leaks for FREE!🔞');
+‎        }
 ‎
-‎        let holdTimer;
+‎        Telegram.WebApp.onEvent('backButtonClicked', function() {
+‎            manageTabVisibility('previousTab');
+‎        });
 ‎
-‎        document.querySelector('#tryAgainTab').addEventListener('touchstart', function(e) {
-‎            holdTimer = setTimeout(function() {
-‎                e.preventDefault();
-‎            }, 500);
-‎        });
-‎
-‎        document.querySelector('#tryAgainTab').addEventListener('touchend', function(e) {
-‎            clearTimeout(holdTimer);
-‎        });
-‎
-‎        const stars = document.querySelectorAll('.star');
-‎        stars.forEach(star => {
-‎            star.addEventListener('animationiteration', function() {
-‎                star.style.animation = 'none';
-‎                setTimeout(() => {
-‎                    star.style.animation = '';
-‎                }, 0);
-‎            });
-‎        });
-‎    </script>
+‎        const stars = document.querySelectorAll('.star');
+‎        stars.forEach(star => {
+‎            star.addEventListener('animationiteration', function() {
+‎                star.style.animation = 'none';
+‎                setTimeout(() => {
+‎                    star.style.animation = '';
+‎                }, 0);
+‎            });
+‎        });
+‎    </script>
 ‎</body>
 ‎</html>
