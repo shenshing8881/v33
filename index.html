@@ -206,22 +206,11 @@
         document.addEventListener('DOMContentLoaded', function() {
             Telegram.WebApp.ready();
             Telegram.WebApp.BackButton.show();
-            
-            const startParam = Telegram.WebApp.initData.start_param;
-            if (startParam) {
-                manageTabVisibility(startParam); // Here, startParam would be 'newTab' if the URL ends with ?startapp=newTab
-            } else {
-                manageTabVisibility('newTab'); // Default to 'newTab' if no parameter is provided
-            }
         });
 
         function handleClick(event, link, tabId) {
             event.preventDefault();
-            if (tabId === 'newTab' || tabId === 'task2Tab') {
-                Telegram.WebApp.openLink(link);
-            } else {
-                Telegram.WebApp.openLink(`t.me/asiaviralsxx_bot/virals?startapp=${tabId}`);
-            }
+            Telegram.WebApp.openLink(link);
             manageTabVisibility(tabId);
         }
 
