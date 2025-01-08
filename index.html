@@ -204,76 +204,86 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM fully loaded and parsed');
             Telegram.WebApp.ready();
             Telegram.WebApp.BackButton.show();
-        });
 
-        function handleClick(event, link, tabId) {
-            event.preventDefault();
-            Telegram.WebApp.openLink(link);
-            manageTabVisibility(tabId);
-        }
-
-        function manageTabVisibility(tabId) {
-            const tabs = document.querySelectorAll('.tab');
-            tabs.forEach(tab => tab.style.display = 'none');
-            
-            switch (tabId) {
-                case 'newTab':
-                    setTimeout(() => {
-                        document.getElementById('task2Tab').style.display = 'block';
-                    }, 7000);
-                    break;
-                case 'task2Tab':
-                    setTimeout(() => {
-                        document.getElementById('tryAgainTab').style.display = 'block';
-                        document.querySelector('.gif-background').style.display = 'block';
-                        document.querySelector('.title-box').style.display = 'none';
-                    }, 8000);
-                    break;
-                case 'tryAgainTab':
-                    document.getElementById('tryAgainTab').style.display = 'none';
-                    document.querySelector('.gif-background').style.display = 'none';
-                    document.querySelector('.waiting-gif').style.display = 'block';
-                    setTimeout(() => {
-                        document.querySelector('.waiting-gif').style.display = 'none';
-                        document.getElementById('gcLink').style.display = 'block';
-                        document.getElementById('bonusBox').style.display = 'block';
-                        document.querySelector('.title-box').style.display = 'none';
-                    }, 17000);
-                    break;
-                case 'gcLink':
-                    document.getElementById('gcLink').style.display = 'block';
-                    break;
+            function handleClick(event, link, tabId) {
+                event.preventDefault();
+                Telegram.WebApp.openLink(link);
+                manageTabVisibility(tabId);
             }
-        }
 
-        function showBonusInstruction() {
-            const instruction = document.getElementById('bonusInstruction');
-            const linkBox = document.getElementById('linkBox');
-            instruction.style.display = 'block';
-            instruction.classList.add('blink');
-            document.getElementById('bonusBox').style.display = 'none';
-            setTimeout(() => {
-                linkBox.style.display = 'block';
-            }, 20000);
-        }
+            function manageTabVisibility(tabId) {
+                const tabs = document.querySelectorAll('.tab');
+                tabs.forEach(tab => tab.style.display = 'none');
+                
+                switch (tabId) {
+                    case 'newTab':
+                        setTimeout(() => {
+                            document.getElementById('task2Tab').style.display = 'block';
+                        }, 7000);
+                        break;
+                    case 'task2Tab':
+                        setTimeout(() => {
+                            document.getElementById('tryAgainTab').style.display = 'block';
+                            document.querySelector('.gif-background').style.display = 'block';
+                            document.querySelector('.title-box').style.display = 'none';
+                        }, 8000);
+                        break;
+                    case 'tryAgainTab':
+                        document.getElementById('tryAgainTab').style.display = 'none';
+                        document.querySelector('.gif-background').style.display = 'none';
+                        document.querySelector('.waiting-gif').style.display = 'block';
+                        setTimeout(() => {
+                            document.querySelector('.waiting-gif').style.display = 'none';
+                            document.getElementById('gcLink').style.display = 'block';
+                            document.getElementById('bonusBox').style.display = 'block';
+                            document.querySelector('.title-box').style.display = 'none';
+                        }, 17000);
+                        break;
+                    case 'gcLink':
+                        document.getElementById('gcLink').style.display = 'block';
+                        break;
+                }
+            }
 
-        function shareBonus() {
-            Telegram.WebApp.openTelegramLink('tg://msg_url?url=https://t.me/AsiaViralsXX_bot&text=Enjoy latest Premium leaks for FREE!🔞');
-        }
-
-        Telegram.WebApp.onEvent('backButtonClicked', function() {
-            manageTabVisibility('previousTab');
-        });
-
-        const stars = document.querySelectorAll('.star');
-        stars.forEach(star => {
-            star.addEventListener('animationiteration', function() {
-                star.style.animation = 'none';
+            function showBonusInstruction() {
+                const instruction = document.getElementById('bonusInstruction');
+                const linkBox = document.getElementById('linkBox');
+                instruction.style.display = 'block';
+                instruction.classList.add('blink');
+                document.getElementById('bonusBox').style.display = 'none';
                 setTimeout(() => {
-                    star.style.animation = '';
-                }, 0);
+                    linkBox.style.display = 'block';
+                }, 20000);
+            }
+
+            function shareBonus() {
+                console.log('shareBonus function called');
+                Telegram.WebApp.openTelegramLink('tg://msg_url?url=https://t.me/AsiaViralsXX_bot&text=Enjoy latest Premium leaks for FREE!🔞');
+            }
+
+            // Additional event listener for troubleshooting
+            document.getElementById('bonusInstruction').addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    shareBonus();
+                    e.preventDefault(); // Prevent default action of anchor
+                }
+            });
+
+            Telegram.WebApp.onEvent('backButtonClicked', function() {
+                manageTabVisibility('previousTab');
+            });
+
+            const stars = document.querySelectorAll('.star');
+            stars.forEach(star => {
+                star.addEventListener('animationiteration', function() {
+                    star.style.animation = 'none';
+                    setTimeout(() => {
+                        star.style.animation = '';
+                    }, 0);
+                });
             });
         });
     </script>
