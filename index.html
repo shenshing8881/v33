@@ -101,16 +101,10 @@
             cursor: pointer;
         }
         .bonus-box {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: transparent;
-            border-radius: 0;
-            padding: 0;
             display: none;
+            position: relative;
             z-index: 1000;
             cursor: pointer;
-            animation: blink-animation 1.5s steps(5, start) infinite;
         }
         .bonus-text {
             color: #FFD700;
@@ -120,13 +114,9 @@
             background-color: rgba(0, 0, 0, 0.7);
             padding: 10px;
             border-radius: 5px;
-            position: absolute;
-            bottom: -60px;
-            left: 50%;
-            transform: translateX(-50%);
             width: 100%;
             max-width: 500px;
-            z-index: 1001;
+            margin-top: 10px;
         }
         .link-box {
             display: none;
@@ -136,7 +126,6 @@
             margin-top: 10px;
             max-width: 500px;
             position: relative;
-            z-index: 1000;
         }
         .link-box a {
             color: white;
