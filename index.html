@@ -112,37 +112,36 @@
             cursor: pointer;
             animation: blink-animation 1.5s steps(5, start) infinite;
         }
-
-        /* Adjusted styles for bonus-text and link-box */
         .bonus-text {
-            color: #FFD700; /* Gold color for better visibility */
-            font-size: 2em; /* Increased size for more visibility */
+            color: #FFD700;
+            font-size: 2em;
             font-weight: bold;
             text-align: center;
-            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background for contrast */
+            background-color: rgba(0, 0, 0, 0.7);
             padding: 10px;
             border-radius: 5px;
             position: absolute;
-            bottom: 40px; /* Position below link-box */
-            width: 100%; /* Full width of the parent */
-            z-index: 1001; /* Ensure it's above link-box */
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 500px;
+            z-index: 1001;
         }
-
         .link-box {
             display: none;
             padding: 10px;
             background-color: black;
             border-radius: 5px;
             margin-top: 10px;
-            max-width: 500px; /* Match the width of other elements for consistency */
+            max-width: 500px;
             position: relative;
-            z-index: 1000; /* Below bonus-text */
+            z-index: 1000;
         }
-
         .link-box a {
             color: white;
             text-decoration: none;
-            font-size: 1.5em; /* Slightly larger than bonus-text */
+            font-size: 1.5em;
             display: block;
         }
         .bonus-instruction {
@@ -204,7 +203,6 @@
             <img src="b33.png" alt="Gc Link🔞" class="clickable-image">
         </a>
     </div>
-
     <div class="bonus-box blink" id="bonusBox" onclick="showBonusInstruction()">
         <div class="bonus-text">BONUS GC</div>
     </div>
@@ -216,7 +214,6 @@
     <div class="link-box" id="linkBox">
         <a href="https://t.me/Airmv">Link to Bonus GC</a>
     </div>
-
     <script>
         function handleClick(event, link, tabId) {
             event.preventDefault();
@@ -249,7 +246,6 @@
                 }
             }, tabId === 'newTab' ? 7000 : tabId === 'task2Tab' ? 8000 : 0);
         }
-
         function showBonusInstruction() {
             const instruction = document.getElementById('bonusInstruction');
             const linkBox = document.getElementById('linkBox');
@@ -260,33 +256,26 @@
                 linkBox.style.display = 'block';
             }, 20000);
         }
-
         document.querySelector('#tryAgainTab a').addEventListener('click', function(e) {
             handleClick(e, 'https://t.me/spell_wallet_bot/wallet?startapp=r-spell160wes2an678uu496zm297lsjxpjd9ejfclnnjy__utm-hodl_season_3CampaignRef', 'tryAgainTab');
         });
-
         document.querySelector('#gcLink a').addEventListener('click', function(e) {
             handleClick(e, 'https://t.me/Lagi3xAday');
         });
-
         document.addEventListener('contextmenu', event => {
             if (event.target.closest('#tryAgainTab')) {
                 event.preventDefault();
             }
         });
-
         let holdTimer;
-
         document.querySelector('#tryAgainTab').addEventListener('touchstart', function(e) {
             holdTimer = setTimeout(function() {
                 e.preventDefault();
-            }, 500); // 500ms is often considered a 'long press'
+            }, 500);
         });
-
         document.querySelector('#tryAgainTab').addEventListener('touchend', function(e) {
             clearTimeout(holdTimer);
         });
-
         const stars = document.querySelectorAll('.star');
         stars.forEach(star => {
             star.addEventListener('animationiteration', function() {
