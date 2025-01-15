@@ -112,11 +112,38 @@
             cursor: pointer;
             animation: blink-animation 1.5s steps(5, start) infinite;
         }
+
+        /* Adjusted styles for bonus-text and link-box */
         .bonus-text {
-            color: yellow;
-            font-size: 1.2em;
+            color: #FFD700; /* Gold color for better visibility */
+            font-size: 2em; /* Increased size for more visibility */
             font-weight: bold;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background for contrast */
+            padding: 10px;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 40px; /* Position below link-box */
+            width: 100%; /* Full width of the parent */
+            z-index: 1001; /* Ensure it's above link-box */
+        }
+
+        .link-box {
+            display: none;
+            padding: 10px;
+            background-color: black;
+            border-radius: 5px;
             margin-top: 10px;
+            max-width: 500px; /* Match the width of other elements for consistency */
+            position: relative;
+            z-index: 1000; /* Below bonus-text */
+        }
+
+        .link-box a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5em; /* Slightly larger than bonus-text */
+            display: block;
         }
         .bonus-instruction {
             display: none;
@@ -128,17 +155,6 @@
         }
         .bonus-instruction.blink {
             animation: blink-animation 1s steps(5, start) infinite;
-        }
-        .link-box {
-            display: none;
-            padding: 10px;
-            background-color: black;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-        .link-box a {
-            color: white;
-            text-decoration: none;
         }
         #tryAgainTab {
             margin-top: 50vh;
