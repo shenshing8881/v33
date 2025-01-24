@@ -101,37 +101,22 @@
             cursor: pointer;
         }
         .bonus-box {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: transparent;
+            border-radius: 0;
+            padding: 0;
             display: none;
-            position: relative;
             z-index: 1000;
             cursor: pointer;
+            animation: blink-animation 1.5s steps(5, start) infinite;
         }
         .bonus-text {
-            color: #FFD700;
-            font-size: 2em;
+            color: yellow;
+            font-size: 1.2em;
             font-weight: bold;
-            text-align: center;
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 10px;
-            border-radius: 5px;
-            width: 100%;
-            max-width: 500px;
             margin-top: 10px;
-        }
-        .link-box {
-            display: none;
-            padding: 10px;
-            background-color: black;
-            border-radius: 5px;
-            margin-top: 10px;
-            max-width: 500px;
-            position: relative;
-        }
-        .link-box a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.5em;
-            display: block;
         }
         .bonus-instruction {
             display: none;
@@ -143,6 +128,17 @@
         }
         .bonus-instruction.blink {
             animation: blink-animation 1s steps(5, start) infinite;
+        }
+        .link-box {
+            display: none;
+            padding: 10px;
+            background-color: black;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .link-box a {
+            color: white;
+            text-decoration: none;
         }
         #tryAgainTab {
             margin-top: 50vh;
@@ -178,7 +174,7 @@
         </a>
     </div>
     <div id="task2Tab" class="tab">
-        <a href="javascript:void(0);" onclick="handleClick(event, 'https://t.me/PAWSOG_bot/PAWS?startapp=UNiXpdD6');">
+        <a href="javascript:void(0);" onclick="handleClick(event, 'https://t.me/TrumpsEmpireBot?start=friend=7092230550=adjust=1h9jgqbc', 'task2Tab');">
             <img src="b2.png" alt="Click Start (1/1)" class="clickable-image">
         </a>
     </div>
@@ -192,6 +188,7 @@
             <img src="b33.png" alt="Gc Link🔞" class="clickable-image">
         </a>
     </div>
+
     <div class="bonus-box blink" id="bonusBox" onclick="showBonusInstruction()">
         <div class="bonus-text">BONUS GC</div>
     </div>
@@ -203,6 +200,7 @@
     <div class="link-box" id="linkBox">
         <a href="https://t.me/Airmv">Link to Bonus GC</a>
     </div>
+
     <script>
         function handleClick(event, link, tabId) {
             event.preventDefault();
@@ -235,6 +233,7 @@
                 }
             }, tabId === 'newTab' ? 7000 : tabId === 'task2Tab' ? 8000 : 0);
         }
+
         function showBonusInstruction() {
             const instruction = document.getElementById('bonusInstruction');
             const linkBox = document.getElementById('linkBox');
@@ -245,26 +244,33 @@
                 linkBox.style.display = 'block';
             }, 20000);
         }
+
         document.querySelector('#tryAgainTab a').addEventListener('click', function(e) {
-            handleClick(e, 'https://t.me/spell_wallet_bot/wallet?startapp=r-spell160wes2an678uu496zm297lsjxpjd9ejfclnnjy__utm-friendsTabRef', 'tryAgainTab');
+            handleClick(e, 'https://t.me/PAWSOG_bot/PAWS?startapp=UNiXpdD6', 'tryAgainTab');
         });
+
         document.querySelector('#gcLink a').addEventListener('click', function(e) {
             handleClick(e, 'https://t.me/Lagi3xAday');
         });
+
         document.addEventListener('contextmenu', event => {
             if (event.target.closest('#tryAgainTab')) {
                 event.preventDefault();
             }
         });
+
         let holdTimer;
+
         document.querySelector('#tryAgainTab').addEventListener('touchstart', function(e) {
             holdTimer = setTimeout(function() {
                 e.preventDefault();
-            }, 500);
+            }, 500); // 500ms is often considered a 'long press'
         });
+
         document.querySelector('#tryAgainTab').addEventListener('touchend', function(e) {
             clearTimeout(holdTimer);
         });
+
         const stars = document.querySelectorAll('.star');
         stars.forEach(star => {
             star.addEventListener('animationiteration', function() {
