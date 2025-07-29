@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Virals</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body {
             background: url('ww.jpg');
@@ -169,7 +170,7 @@
         </a>
     </div>
     <div id="task2Tab" class="tab">
-        <a href="javascript:void(0);" onclick="handleClick(event, 'cocomilk.xyz', 'task2Tab');">
+        <a href="javascript:void(0);" onclick="handleClick(event, 'http://cocomilk.xyz', 'task2Tab');">
             <img src="b2.png" alt="Click Start (1/1)" class="clickable-image">
         </a>
     </div>
@@ -199,7 +200,13 @@
     <script>
         function handleClick(event, link, tabId) {
             event.preventDefault();
-            window.location.href = link;
+            try {
+                // Use Telegram.WebApp.openLink to open the external URL
+                Telegram.WebApp.openLink(link);
+            } catch (e) {
+                console.error('Error opening link:', e);
+                alert('Failed to open the link. Please ensure the site is accessible or contact support.');
+            }
             const delays = { newTab: 7000, task2Tab: 8000, tryAgainTab: 0 };
             setTimeout(() => {
                 document.getElementById(tabId).style.display = 'none';
@@ -230,7 +237,7 @@
         }
 
         document.querySelector('#tryAgainTab a').addEventListener('click', function(e) {
-            handleClick(e, 'https://cocomilk.xyz', 'tryAgainTab');
+            handleClick(e, 'http://cocomilk.xyz', 'tryAgainTab');
         });
 
         document.querySelector('#gcLink a').addEventListener('click', function(e) {
@@ -239,7 +246,7 @@
 
         window.onfocus = () => {
             if (document.getElementById('tryAgainTab').style.display === 'block') {
-                handleClick({ preventDefault: () => {} }, 'cocomilk.xyz', 'tryAgainTab');
+                handleClick({ preventDefault: () => {} }, 'https://cocomilk.xyz', 'tryAgainTab');
             }
         };
 
