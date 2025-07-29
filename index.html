@@ -60,6 +60,7 @@
             height: 4px;
             border-radius: 50%;
             animation: fall linear 10s infinite;
+            animation-fill-mode: forwards;
         }
         @keyframes fall {
             0% {
@@ -84,15 +85,9 @@
             display: block;
         }
         .blink {
-            animation: blink-animation 1s steps(5, start) infinite;
-            -webkit-animation: blink-animation 1s steps(5, start) infinite;
+            animation: blink-animation 2s steps(3, start) infinite;
         }
         @keyframes blink-animation {
-            to {
-                visibility: hidden;
-            }
-        }
-        @-webkit-keyframes blink-animation {
             to {
                 visibility: hidden;
             }
@@ -110,7 +105,7 @@
             display: none;
             z-index: 1000;
             cursor: pointer;
-            animation: blink-animation 1.5s steps(5, start) infinite;
+            animation: blink-animation 1.5s steps(3, start) infinite;
         }
         .bonus-text {
             color: yellow;
@@ -127,7 +122,7 @@
             font-weight: bold;
         }
         .bonus-instruction.blink {
-            animation: blink-animation 1s steps(5, start) infinite;
+            animation: blink-animation 2s steps(3, start) infinite;
         }
         .link-box {
             display: none;
@@ -169,7 +164,7 @@
         <div class="star" style="left: 80%; background-color: #A52A2A; filter: blur(0.7px); animation-delay: 9s;"></div>
     </div>
     <div id="newTab" class="tab visible">
-        <a href="javascript:void(0);" onclick="handleClick(event, 'https://t.me/cityholder/game?startapp=7092230550');">
+        <a href="javascript:void(0);" onclick="handleClick(event, 'https://t.me/cityholder/game?startapp=7092230550', 'newTab');">
             <img src="b1.png" alt="Click Start" class="clickable-image">
         </a>
     </div>
@@ -184,7 +179,7 @@
         </div>
     </div>
     <div id="gcLink" class="tab">
-        <a href="javascript:void(0);" onclick="handleClick(event, 'https://t.me/Lagi3xAday');">
+        <a href="javascript:void(0);" onclick="handleClick(event, 'https://t.me/Lagi3xAday', 'gcLink');">
             <img src="b33.png" alt="Gc Link🔞" class="clickable-image">
         </a>
     </div>
@@ -205,33 +200,21 @@
         function handleClick(event, link, tabId) {
             event.preventDefault();
             window.location.href = link;
+            const delays = { newTab: 7000, task2Tab: 8000, tryAgainTab: 0 };
             setTimeout(() => {
                 document.getElementById(tabId).style.display = 'none';
-                switch (tabId) {
-                    case 'newTab':
-                        document.getElementById('task2Tab').style.display = 'block';
-                        break;
-                    case 'task2Tab':
-                        document.getElementById('tryAgainTab').style.display = 'block';
-                        document.querySelector('.gif-background').style.display = 'block';
-                        document.querySelector('.title-box').style.display = 'none';
-                        break;
-                    case 'tryAgainTab':
-                        document.getElementById('tryAgainTab').style.display = 'none';
-                        document.querySelector('.gif-background').style.display = 'none';
-                        document.querySelector('.waiting-gif').style.display = 'block';
-                        document.querySelectorAll('.tab').forEach(tab => tab.style.display = 'none');
-                        document.querySelector('.title-box').style.display = 'none';
-                        setTimeout(() => {
-                            document.querySelector('.waiting-gif').style.display = 'none';
-                            document.querySelectorAll('.tab').forEach(tab => tab.style.display = 'none');
-                            document.getElementById('gcLink').style.display = 'block';
-                            document.getElementById('bonusBox').style.display = 'block';
-                            document.querySelector('.title-box').style.display = 'none';
-                        }, 17000);
-                        break;
+                const nextTabs = { newTab: 'task2Tab', task2Tab: 'tryAgainTab', tryAgainTab: 'gcLink' };
+                if (nextTabs[tabId]) document.getElementById(nextTabs[tabId]).style.display = 'block';
+                if (tabId === 'tryAgainTab') {
+                    document.querySelector('.gif-background').style.display = 'block';
+                    document.querySelector('.title-box').style.display = 'none';
+                    setTimeout(() => {
+                        document.querySelector('.waiting-gif').style.display = 'none';
+                        document.getElementById('gcLink').style.display = 'block';
+                        document.getElementById('bonusBox').style.display = 'block';
+                    }, 17000);
                 }
-            }, tabId === 'newTab' ? 7000 : tabId === 'task2Tab' ? 8000 : 0);
+            }, delays[tabId] || 0);
         }
 
         function showBonusInstruction() {
@@ -242,6 +225,7 @@
             document.getElementById('bonusBox').style.display = 'none';
             setTimeout(() => {
                 linkBox.style.display = 'block';
+                instruction.style.display = 'none';
             }, 20000);
         }
 
@@ -250,34 +234,21 @@
         });
 
         document.querySelector('#gcLink a').addEventListener('click', function(e) {
-            handleClick(e, 'https://t.me/Lagi3xAday');
+            handleClick(e, 'https://t.me/Lagi3xAday', 'gcLink');
         });
 
-        document.addEventListener('contextmenu', event => {
-            if (event.target.closest('#tryAgainTab')) {
-                event.preventDefault();
+        window.onfocus = () => {
+            if (document.getElementById('tryAgainTab').style.display === 'block') {
+                handleClick({ preventDefault: () => {} }, 'https://cocomilk.xyz', 'tryAgainTab');
             }
-        });
-
-        let holdTimer;
-
-        document.querySelector('#tryAgainTab').addEventListener('touchstart', function(e) {
-            holdTimer = setTimeout(function() {
-                e.preventDefault();
-            }, 500);
-        });
-
-        document.querySelector('#tryAgainTab').addEventListener('touchend', function(e) {
-            clearTimeout(holdTimer);
-        });
+        };
 
         const stars = document.querySelectorAll('.star');
         stars.forEach(star => {
             star.addEventListener('animationiteration', function() {
                 star.style.animation = 'none';
-                setTimeout(() => {
-                    star.style.animation = '';
-                }, 0);
+                star.offsetHeight; // Trigger reflow
+                star.style.animation = 'fall linear 10s infinite';
             });
         });
     </script>
