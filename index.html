@@ -1,263 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Virals</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <style>
-        body {
-            background: url('ww.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
-        }
-        .gif-background, .waiting-gif {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('qw.gif') center center no-repeat;
-            background-size: cover;
-            z-index: -1;
-            display: none;
-        }
-        .waiting-gif {
-            background: url('c.gif') center center no-repeat;
-            background-size: contain;
-        }
-        .title-box {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            position: relative;
-            overflow: hidden;
-            width: 80%;
-            max-width: 500px;
-            text-align: center;
-            z-index: 1;
-        }
-        h1 {
-            color: white;
-            font-size: calc(1em - 1px);
-            position: relative;
-            z-index: 2;
-        }
-        .star {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            animation: fall linear 10s infinite;
-            animation-fill-mode: forwards;
-        }
-        @keyframes fall {
-            0% {
-                transform: translateY(-100px);
-                opacity: 0;
-            }
-            5% {
-                opacity: 1;
-            }
-            95% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(calc(100vh + 100px));
-                opacity: 0;
-            }
-        }
-        .tab {
-            display: none;
-        }
-        .visible {
-            display: block;
-        }
-        .blink {
-            animation: blink-animation 2s steps(3, start) infinite;
-        }
-        @keyframes blink-animation {
-            to {
-                visibility: hidden;
-            }
-        }
-        .clickable-image {
-            cursor: pointer;
-        }
-        .bonus-box {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: transparent;
-            border-radius: 0;
-            padding: 0;
-            display: none;
-            z-index: 1000;
-            cursor: pointer;
-            animation: blink-animation 1.5s steps(3, start) infinite;
-        }
-        .bonus-text {
-            color: yellow;
-            font-size: 1.2em;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-        .bonus-instruction {
-            display: none;
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 10px;
-            border-radius: 5px;
-            color: #ff0000;
-            font-weight: bold;
-        }
-        .bonus-instruction.blink {
-            animation: blink-animation 2s steps(3, start) infinite;
-        }
-        .link-box {
-            display: none;
-            padding: 10px;
-            background-color: black;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-        .link-box a {
-            color: white;
-            text-decoration: none;
-        }
-        #tryAgainTab {
-            margin-top: 50vh;
-            position: relative;
-        }
-        .rectangle-box {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 10px;
-            border-radius: 5px;
-            max-width: 500px;
-            text-align: center;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virals</title>
+
+  <!-- Telegram Mini App SDK (must be in <head> before other scripts) -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <style>
+    body {
+      background: url('ww.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .gif-background, .waiting-gif {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('qw.gif') center center no-repeat;
+      background-size: cover;
+      z-index: -1;
+      display: none;
+    }
+    .waiting-gif {
+      background: url('c.gif') center center no-repeat;
+      background-size: contain;
+    }
+    .title-box {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+      width: 80%;
+      max-width: 500px;
+      text-align: center;
+      z-index: 1;
+    }
+    h1 {
+      color: white;
+      font-size: calc(1em - 1px);
+      position: relative;
+      z-index: 2;
+    }
+    .star {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      animation: fall linear 10s infinite;
+      animation-fill-mode: forwards;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-100px); opacity: 0; }
+      5% { opacity: 1; }
+      95% { opacity: 1; }
+      100% { transform: translateY(calc(100vh + 100px)); opacity: 0; }
+    }
+    .tab { display: none; }
+    .visible { display: block; }
+
+    .blink { animation: blink-animation 2s steps(3, start) infinite; }
+    @keyframes blink-animation { to { visibility: hidden; } }
+
+    .clickable-image { cursor: pointer; }
+
+    .bonus-box {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: transparent;
+      border-radius: 0;
+      padding: 0;
+      display: none;
+      z-index: 1000;
+      cursor: pointer;
+      animation: blink-animation 1.5s steps(3, start) infinite;
+    }
+    .bonus-text {
+      color: yellow;
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .bonus-instruction {
+      display: none;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 10px;
+      border-radius: 5px;
+      color: #ff0000;
+      font-weight: bold;
+      max-width: 92vw;
+      text-align: center;
+    }
+    .bonus-instruction.blink { animation: blink-animation 2s steps(3, start) infinite; }
+
+    .link-box {
+      display: none;
+      padding: 10px;
+      background-color: black;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+    .link-box a { color: white; text-decoration: none; }
+
+    #tryAgainTab { margin-top: 50vh; position: relative; }
+    .rectangle-box {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 10px;
+      border-radius: 5px;
+      max-width: 500px;
+      text-align: center;
+    }
+  </style>
 </head>
+
 <body>
-    <div class="gif-background"></div>
-    <div class="waiting-gif"></div>
-    <div class="title-box">
-        <h1>Open the bot below for 10 secs to get your link 🔞</h1>
-        <div class="star" style="left: 10%; background-color: #FF0000; filter: blur(0.7px);"></div>
-        <div class="star" style="left: 30%; background-color: #FFA500; filter: blur(0.7px); animation-delay: 2s;"></div>
-        <div class="star" style="left: 50%; background-color: #FFFF00; filter: blur(0.7px); animation-delay: 4s;"></div>
-        <div class="star" style="left: 70%; background-color: #008000; filter: blur(0.7px); animation-delay: 6s;"></div>
-        <div class="star" style="left: 90%; background-color: #0000FF; filter: blur(0.7px); animation-delay: 8s;"></div>
-        <div class="star" style="left: 20%; background-color: #4B0082; filter: blur(0.7px); animation-delay: 3s;"></div>
-        <div class="star" style="left: 40%; background-color: #EE82EE; filter: blur(0.7px); animation-delay: 5s;"></div>
-        <div class="star" style="left: 60%; background-color: #FFC0CB; filter: blur(0.7px); animation-delay: 7s;"></div>
-        <div class="star" style="left: 80%; background-color: #A52A2A; filter: blur(0.7px); animation-delay: 9s;"></div>
-    </div>
-    <div id="newTab" class="tab visible">
-        <a href="javascript:void(0);" onclick="handleClick(event, 'https://t.me/spell_wallet_bot/wallet?startapp=referral=sei160wes2an678uu496zm297lsjxpjd9ejf38uh39', 'newTab');">
-            <img src="b1.png" alt="Click Start" class="clickable-image">
-        </a>
-    </div>
-    <div id="task2Tab" class="tab">
-        <a href="javascript:void(0);" onclick="handleClick(event, 'https://alh.app/ghR6W', 'task2Tab');">
-            <img src="b2.png" alt="Click Start (1/1)" class="clickable-image">
-        </a>
-    </div>
-    <div id="tryAgainTab" class="tab">
-        <div class="rectangle-box">
-            <a href="#" style="color: #ff0; text-decoration: none;">You didn't do the task.❌ Please click Start again🔎</a>
-        </div>
-    </div>
-    <div id="gcLink" class="tab">
-        <a href="javascript:void(0);" onclick="handleClick(event, 'https://t.me/crazyshitpulse', 'gcLink');">
-            <img src="b33.png" alt="Gc Link🔞" class="clickable-image">
-        </a>
-    </div>
+  <div class="gif-background"></div>
+  <div class="waiting-gif"></div>
 
-    <div class="bonus-box blink" id="bonusBox" onclick="showBonusInstruction()">
-        <div class="bonus-text">BONUS GC</div>
-    </div>
-    <div class="bonus-instruction" id="bonusInstruction">
-        <a href="https://telegram.me/share/url?url=https://t.me/AsiaViralsXX_bot&text=Enjoy%20latest%20Premium%20leaks%20for%20FREE!%E2%9D%A4%EF%B8%8F%E2%9D%A4%EF%B8%8F" style="text-decoration: none; color: inherit;">
-            <b>To access the BONUS XX GC, you need to Share/Forward this ONCE to any Group Chat first</b>
-        </a>
-    </div>
-    <div class="link-box" id="linkBox">
-        <a href="https://t.me/crazyshitpulse">Link to Bonus GC</a>
-    </div>
+  <div class="title-box" id="titleBox">
+    <h1>Open the bot below for 10 secs to get your link 🔞</h1>
 
-    <script>
-        function handleClick(event, link, tabId) {
-            event.preventDefault();
-            try {
-                // Use Telegram.WebApp.openLink to open the external URL
-                Telegram.WebApp.openLink(link);
-            } catch (e) {
-                console.error('Error opening link:', e);
-                alert('Failed to open the link. Please ensure the site is accessible or contact support.');
-            }
-            const delays = { newTab: 7000, task2Tab: 8000, tryAgainTab: 0 };
-            setTimeout(() => {
-                document.getElementById(tabId).style.display = 'none';
-                const nextTabs = { newTab: 'task2Tab', task2Tab: 'tryAgainTab', tryAgainTab: 'gcLink' };
-                if (nextTabs[tabId]) document.getElementById(nextTabs[tabId]).style.display = 'block';
-                if (tabId === 'tryAgainTab') {
-                    document.querySelector('.gif-background').style.display = 'block';
-                    document.querySelector('.title-box').style.display = 'none';
-                    setTimeout(() => {
-                        document.querySelector('.waiting-gif').style.display = 'none';
-                        document.getElementById('gcLink').style.display = 'block';
-                        document.getElementById('bonusBox').style.display = 'block';
-                    }, 17000);
-                }
-            }, delays[tabId] || 0);
+    <div class="star" style="left: 10%; background-color: #FF0000; filter: blur(0.7px);"></div>
+    <div class="star" style="left: 30%; background-color: #FFA500; filter: blur(0.7px); animation-delay: 2s;"></div>
+    <div class="star" style="left: 50%; background-color: #FFFF00; filter: blur(0.7px); animation-delay: 4s;"></div>
+    <div class="star" style="left: 70%; background-color: #008000; filter: blur(0.7px); animation-delay: 6s;"></div>
+    <div class="star" style="left: 90%; background-color: #0000FF; filter: blur(0.7px); animation-delay: 8s;"></div>
+    <div class="star" style="left: 20%; background-color: #4B0082; filter: blur(0.7px); animation-delay: 3s;"></div>
+    <div class="star" style="left: 40%; background-color: #EE82EE; filter: blur(0.7px); animation-delay: 5s;"></div>
+    <div class="star" style="left: 60%; background-color: #FFC0CB; filter: blur(0.7px); animation-delay: 7s;"></div>
+    <div class="star" style="left: 80%; background-color: #A52A2A; filter: blur(0.7px); animation-delay: 9s;"></div>
+  </div>
+
+  <!-- Step 1 -->
+  <div id="newTab" class="tab visible">
+    <a href="#"
+       data-tab="newTab"
+       data-url="https://t.me/spell_wallet_bot/wallet?startapp=referral=sei160wes2an678uu496zm297lsjxpjd9ejf38uh39">
+      <img src="b1.png" alt="Click Start" class="clickable-image">
+    </a>
+  </div>
+
+  <!-- Step 2 -->
+  <div id="task2Tab" class="tab">
+    <a href="#"
+       data-tab="task2Tab"
+       data-url="https://alh.app/ghR6W">
+      <img src="b2.png" alt="Click Start (1/1)" class="clickable-image">
+    </a>
+  </div>
+
+  <!-- Try again screen -->
+  <div id="tryAgainTab" class="tab">
+    <div class="rectangle-box">
+      <a href="#"
+         data-tab="tryAgainTab"
+         data-url="https://alh.app/ghR6W"
+         style="color: #ff0; text-decoration: none;">
+        You didn't do the task.❌ Please click Start again🔎
+      </a>
+    </div>
+  </div>
+
+  <!-- Final link -->
+  <div id="gcLink" class="tab">
+    <a href="#"
+       data-tab="gcLink"
+       data-url="https://t.me/crazyshitpulse">
+      <img src="b33.png" alt="Gc Link🔞" class="clickable-image">
+    </a>
+  </div>
+
+  <!-- Bonus -->
+  <div class="bonus-box blink" id="bonusBox">
+    <div class="bonus-text">BONUS GC</div>
+  </div>
+
+  <div class="bonus-instruction" id="bonusInstruction">
+    <a href="https://telegram.me/share/url?url=https://t.me/AsiaViralsXX_bot&text=Enjoy%20latest%20Premium%20leaks%20for%20FREE!%E2%9D%A4%EF%B8%8F%E2%9D%A4%EF%B8%8F"
+       style="text-decoration: none; color: inherit;">
+      <b>To access the BONUS XX GC, you need to Share/Forward this ONCE to any Group Chat first</b>
+    </a>
+  </div>
+
+  <div class="link-box" id="linkBox">
+    <a href="https://t.me/crazyshitpulse">Link to Bonus GC</a>
+  </div>
+
+  <script>
+    const tg = window.Telegram?.WebApp;
+
+    // Telegram docs: openLink/openTelegramLink can be called only after user interaction (click). 
+    // So no auto-run on focus; only run from click handlers. (This is why your old onfocus logic was unreliable.) 
+    // Source: Telegram Mini Apps docs. 
+    // https://core.telegram.org/bots/webapps
+    try { tg?.ready?.(); } catch (e) {}
+
+    function showTab(id) {
+      document.querySelectorAll('.tab').forEach(t => t.style.display = 'none');
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'block';
+    }
+
+    function openAnyLink(url) {
+      const isTelegram = /^https?:\/\/t\.me\//i.test(url) || /^tg:\/\//i.test(url);
+
+      try {
+        if (tg) {
+          // Telegram docs: openTelegramLink opens Telegram links inside Telegram; openLink opens external link. 
+          // https://core.telegram.org/bots/webapps
+          if (isTelegram && typeof tg.openTelegramLink === 'function') {
+            tg.openTelegramLink(url);
+            return;
+          }
+          if (typeof tg.openLink === 'function') {
+            tg.openLink(url);
+            return;
+          }
         }
+      } catch (e) {
+        console.error('Error opening link:', e);
+      }
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
 
-        function showBonusInstruction() {
-            const instruction = document.getElementById('bonusInstruction');
-            const linkBox = document.getElementById('linkBox');
-            instruction.style.display = 'block';
-            instruction.classList.add('blink');
-            document.getElementById('bonusBox').style.display = 'none';
-            setTimeout(() => {
-                linkBox.style.display = 'block';
-                instruction.style.display = 'none';
-            }, 20000);
-        }
+    // Flow and delays
+    const FLOW = {
+      newTab:   { next: 'task2Tab', delay: 7000 },
+      task2Tab: { next: 'tryAgainTab', delay: 8000 }
+    };
 
-        document.querySelector('#tryAgainTab a').addEventListener('click', function(e) {
-            handleClick(e, 'https://alh.app/ghR6W', 'tryAgainTab');
-        });
+    function startFinalCountdown() {
+      document.querySelector('.gif-background').style.display = 'block';
+      document.getElementById('titleBox').style.display = 'none';
 
-        document.querySelector('#gcLink a').addEventListener('click', function(e) {
-            handleClick(e, 'https://t.me/crazyshitpulse', 'gcLink');
-        });
+      const waiting = document.querySelector('.waiting-gif');
+      waiting.style.display = 'block';
 
-        window.onfocus = () => {
-            if (document.getElementById('tryAgainTab').style.display === 'block') {
-                handleClick({ preventDefault: () => {} }, 'https://alh.app/ghR6W', 'tryAgainTab');
-            }
-        };
+      setTimeout(() => {
+        waiting.style.display = 'none';
+        showTab('gcLink');
+        document.getElementById('bonusBox').style.display = 'block';
+      }, 17000);
+    }
 
-        const stars = document.querySelectorAll('.star');
-        stars.forEach(star => {
-            star.addEventListener('animationiteration', function() {
-                star.style.animation = 'none';
-                star.offsetHeight; // Trigger reflow
-                star.style.animation = 'fall linear 10s infinite';
-            });
-        });
-    </script>
+    // Bonus
+    function showBonusInstruction() {
+      const instruction = document.getElementById('bonusInstruction');
+      const linkBox = document.getElementById('linkBox');
+
+      instruction.style.display = 'block';
+      instruction.classList.add('blink');
+      document.getElementById('bonusBox').style.display = 'none';
+
+      setTimeout(() => {
+        linkBox.style.display = 'block';
+        instruction.style.display = 'none';
+      }, 20000);
+    }
+
+    // Event delegation: all buttons work
+    document.body.addEventListener('click', (e) => {
+      const bonus = e.target.closest('#bonusBox');
+      if (bonus) {
+        e.preventDefault();
+        showBonusInstruction();
+        return;
+      }
+
+      const a = e.target.closest('a[data-tab][data-url]');
+      if (!a) return;
+
+      e.preventDefault();
+      const tabId = a.dataset.tab;
+      const url = a.dataset.url;
+
+      // Always open link on click
+      openAnyLink(url);
+
+      // Special: tryAgain -> open link then start countdown to final gcLink + bonus
+      if (tabId === 'tryAgainTab') {
+        startFinalCountdown();
+        return;
+      }
+
+      // Normal flow
+      const step = FLOW[tabId];
+      if (step) setTimeout(() => showTab(step.next), step.delay);
+    });
+
+    // Initial state
+    showTab('newTab');
+  </script>
 </body>
 </html>
